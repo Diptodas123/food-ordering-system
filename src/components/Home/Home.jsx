@@ -1,6 +1,5 @@
 import "./Home.css";
 import Navbar from "../Navbar/Navbar";
-import { Container } from "react-bootstrap";
 
 const Home = () => {
   return (
