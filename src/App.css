@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #3d3d3d;
+    color: white;
+    transform: scale(1.05);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+}
