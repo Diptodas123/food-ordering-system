@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+::-ms-input-placeholder{
+    color: white;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -19,7 +28,7 @@ html {
     color: black;
 }
 
-img{
+img {
     object-fit: cover;
 }
 

@@ -26,7 +26,7 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <HalfPagedImage image={"https://images.pexels.com/photos/2074108/pexels-photo-2074108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
+            <HalfPagedImage image={"img/login-pic.jpeg"} />
             <div className="login-form-container container" style={{alignItems: "center"}}>
                 <form className="login-form" onSubmit={handleSubmit} method="POST">
                     <Link to={"/"}>

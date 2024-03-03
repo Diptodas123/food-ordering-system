@@ -115,4 +115,8 @@
     .login-heading {
         font-size: 2rem;
     }
+
+    .login-container{
+        overflow: visible;
+    }
 }

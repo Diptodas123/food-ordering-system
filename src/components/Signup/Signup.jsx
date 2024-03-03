@@ -20,18 +20,18 @@ const Signup = () => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     }
 
-    const handleGoogle=(e)=>{
+    const handleGoogle = (e) => {
         e.preventDefault();
     }
 
     return (
         <div className='login-container'>
-            <HalfPagedImage image={"https://images.pexels.com/photos/5604829/pexels-photo-5604829.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
+            <HalfPagedImage image={"img/signup-pic.jpeg"} />
             <div className="login-form-container container">
                 <form className="login-form" onSubmit={handleSubmit} method="POST`">
                     <div className="d-flex justify-content-between align-items-center">
                         <h1 className="login-heading">Create Your Account</h1>
-                        <PersonIcon style={{ fontSize: "3rem" }}/>
+                        <PersonIcon style={{ fontSize: "3rem" }} />
                     </div>
                     <p>Please complete your account details</p>
                     <div className="form-name-label-grp">
@@ -96,8 +96,7 @@ const Signup = () => {
                         }
                     </div>
                     <input className="btn mt-4" type="submit" value="Submit" style={{ width: "100%" }} />
-                    <button onClick={handleGoogle} className="btn mt-2" style={{ width: "100%",display:"flex",justifyContent:"center",alignItems:"center" }}><GoogleIcon />&nbsp; Continue with Google</button>
-                    <hr />
+                    <button onClick={handleGoogle} className="btn mt-2" style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}><GoogleIcon />&nbsp; Continue with Google</button>
                 </form>
             </div>
         </div>
