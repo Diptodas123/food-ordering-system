@@ -4,6 +4,7 @@
     align-items: center;
     height: 6rem;
     padding: 0 2rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: relative;
     width: 100%;
     z-index: 0;
@@ -33,13 +34,28 @@
     align-items: center;
 }
 
+.dark-mode .navbar a {
+    color: white;
+}
+
+.light-mode .navbar a {
+    color: black;
+}
+
 .navbar .nav-items .nav-item:hover {
     border-bottom: 1px solid black;
 }
 
+.dark-mode .navbar .nav-items .nav-item:hover {
+    border-bottom: 1px solid white;
+}
 
-.navbar .nav-items .active {
+.light-mode .navbar .nav-items .active {
     border-bottom: 1px solid black;
+}
+
+.dark-mode .navbar .nav-items .active {
+    border-bottom: 1px solid white;
 }
 
 #hamburger-menu {

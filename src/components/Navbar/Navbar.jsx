@@ -15,13 +15,12 @@ const Navbar = () => {
   const location = useLocation();
   const [showVerticalNav, setShowVerticalNav] = useState(false);
   const { mode, toggleMode } = useAppContext();
-  console.log(mode);
 
   return (
     <>
       {
         !showVerticalNav &&
-        <nav className="navbar" style={{ boxShadow: mode === "light" ? "rgba(0, 0, 0, 0.35) 0px 5px 15px" : null,borderBottom: mode === "dark" ? "1px solid white" : null }}>
+        <nav className="navbar">
           <div className="logo">
             <h2>
               <NavLink to={"/"}>
@@ -41,7 +40,7 @@ const Navbar = () => {
             </NavLink>
             <li className="nav-item" onClick={() => toggleMode()}>
               {
-                mode === "light" ? <LightModeIcon /> :
+                mode === "light-mode" ? <LightModeIcon /> :
                   <DarkMode />
               }
             </li>
@@ -75,6 +74,12 @@ const Navbar = () => {
           <NavLink to={"/help"} className={location.pathname === '/help' ? "nav-item active" : "nav-item"}>
             <HelpIcon /> Help
           </NavLink>
+          <li className="nav-item" onClick={() => toggleMode()}>
+            {
+              mode === "light-mode" ? <LightModeIcon /> :
+                <DarkMode />
+            }
+          </li>
           <NavLink to={"/login"} className="nav-item">
             <button className="btn">Log In/Sign Up</button>
           </NavLink>

@@ -8,6 +8,21 @@ html {
     scroll-behavior: smooth;
 }
 
+.dark-mode {
+    background-color: #092635;
+    color: white;
+
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+img{
+    object-fit: cover;
+}
+
 .btn {
     padding: 0.5rem 1rem;
     border: none;
@@ -33,16 +48,5 @@ a {
 
 a:hover {
     text-decoration: none;
-    color: black;
-}
-
-.dark-mode {
-    background-color: black;
-    color: white;
-
-}
-
-.light-mode {
-    background-color: white;
     color: black;
 }
