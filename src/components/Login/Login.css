@@ -24,6 +24,14 @@
     top: 0;
 }
 
+.half-paged figure {
+    width: 100%;
+}
+
+.dark-mode .login-back-btn {
+    color: white;
+}
+
 .login-container .login-form {
     /* background-color: black; */
     color: black;
@@ -38,7 +46,7 @@
     align-items: center;
 }
 
-.login-container .login-form input[type='email']{
+.login-container .login-form input[type='email'] {
     background-color: rgb(136, 133, 133);
     border-radius: 5px;
     border: 1px solid black;
@@ -53,6 +61,62 @@
     position: relative;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.half-paged-image-heading {
+    color: white;
+    font-family: "Playfair Display", serif;
+    position: absolute;
+    left: 3%;
+    top: 1%;
+}
+
+.half-paged-quote {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.half-paged-quote p {
+    font-weight: 900;
+
+}
+
+.dark-mode .half-paged-image-heading {
+    color: white;
+
+}
+
+.signup-profile-icon {
+    font-size: 3rem;
+}
+
+.dark-mode .signup-profile-icon {
+    color: white;
+}
+
+.half-paged-image-heading {
+    position: absolute;
+}
+
+.dark-mode .login-heading {
+    color: white;
+}
+
+.dark-mode .label-tag {
+    color: white;
+}
+
+.dark-mode p {
+    color: white;
+}
+
+.dark-mode .horizontal-line {
+    background-color: white;
 }
 
 .login-password-div .eye-icon {
@@ -100,10 +164,13 @@
     position: relative;
 }
 
-.half-paged .half-paged-image {
+.half-paged .half-paged-image-container {
     position: absolute;
     width: 100vh;
     height: 100vw;
+}
+
+.half-paged .half-paged-image-container #half-paged-image {
     opacity: 0.9;
 }
 
@@ -116,7 +183,7 @@
         font-size: 2rem;
     }
 
-    .login-container{
+    .login-container {
         overflow: visible;
     }
 }

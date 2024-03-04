@@ -4,7 +4,7 @@
     align-items: center;
     height: 6rem;
     padding: 0 2rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     position: relative;
     width: 100%;
     z-index: 0;
@@ -12,7 +12,25 @@
 
 .navbar .logo {
     text-transform: uppercase;
-    color: inherit;
+    font-family: "Playfair Display", serif;
+}
+
+.dark-mode .navbar .btn {
+    background-color:rgb(216, 197, 197);
+    color: black;
+}
+
+.dark-mode .navbar .btn:hover {
+    background-color: #3d3d3d;
+    color: white;
+    transform: scale(1.05);
+}
+.light-mode .navbar{
+    background-color: rgb(216, 197, 197);
+}
+
+.dark-mode .navbar{
+    background-color: black;
 }
 
 .navbar .nav-items {

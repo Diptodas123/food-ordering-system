@@ -26,21 +26,21 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <HalfPagedImage image={"img/login-pic.jpeg"} />
+            <HalfPagedImage image={"img/login-pic.jpeg"} page={"login"}  />
             <div className="login-form-container container" style={{alignItems: "center"}}>
                 <form className="login-form" onSubmit={handleSubmit} method="POST">
                     <Link to={"/"}>
-                        <button className="login-back-btn mb-4">&gt;Back to Home</button>
+                        <button className="login-back-btn mb-4">&gt;&nbsp;Back to Home</button>
                     </Link>
                     <h1 className="login-heading">Login to foodzie.com</h1>
-                    <label htmlFor="email">Email</label>
+                    <label className="label-tag" htmlFor="email">Email</label>
                     <br />
                     <input value={userData.email}
                         onChange={handleOnChange}
                         type="email" name="email" placeholder="you@gmail.com"
                         id="email" required />
                     <br />
-                    <label htmlFor="password">Your Password</label>
+                    <label className="label-tag" htmlFor="password">Your Password</label>
                     <br />
                     <div className="login-password-div">
                         <input value={userData.password}
@@ -55,7 +55,7 @@ const Login = () => {
                     </div>
                     <input className="btn mt-4" type="submit" value="Login" style={{ width: "100%" }} />
                     <button onClick={handleGoogle} className="btn mt-2" style={{ width: "100%",display:"flex",justifyContent:"center",alignItems:"center" }}><GoogleIcon />&nbsp; Continue with Google</button>
-                    <hr />
+                    <hr className="horizontal-line" />
                     <div className="login-footer">
                         <p>Don't have an account?</p>
                         <Link to={"/signup"}>

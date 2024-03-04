@@ -26,17 +26,17 @@ const Signup = () => {
 
     return (
         <div className='login-container'>
-            <HalfPagedImage image={"img/signup-pic.jpeg"} />
+            <HalfPagedImage image={"img/signup-pic.jpeg"}/>
             <div className="login-form-container container">
                 <form className="login-form" onSubmit={handleSubmit} method="POST`">
                     <div className="d-flex justify-content-between align-items-center">
                         <h1 className="login-heading">Create Your Account</h1>
-                        <PersonIcon style={{ fontSize: "3rem" }} />
+                        <PersonIcon className="signup-profile-icon" fontSize="large" />
                     </div>
                     <p>Please complete your account details</p>
                     <div className="form-name-label-grp">
-                        <label htmlFor="fname">First Name</label>
-                        <label htmlFor="lname">Last Name</label>
+                        <label className='label-tag' htmlFor="fname">First Name</label>
+                        <label className='label-tag' htmlFor="lname">Last Name</label>
                     </div>
                     <div className="form-name-input-grp">
                         <input value={userData.fname}
@@ -49,14 +49,14 @@ const Signup = () => {
                             id="lname" required />
                     </div>
 
-                    <label htmlFor="email">Email</label>
+                    <label className='label-tag' htmlFor="email">Email</label>
                     <br />
                     <input value={userData.email}
                         onChange={handleOnChange}
                         type="email" name="email" placeholder="you@gmail.com"
                         id="email" required />
                     <br />
-                    <label htmlFor="phone">Phone Number</label>
+                    <label className='label-tag' htmlFor="phone">Phone Number</label>
                     <br />
                     <input value={userData.phone}
                         className="login-phone-input"
@@ -73,7 +73,7 @@ const Signup = () => {
                         }}
                     />
                     <br />
-                    <label htmlFor="password">Your Password</label>
+                    <label className='label-tag' htmlFor="password">Your Password</label>
                     <br />
                     <div className="login-password-div">
                         <input value={userData.password}
@@ -82,7 +82,7 @@ const Signup = () => {
                             id="password" required />
                     </div>
 
-                    <label htmlFor="conpassword">Confirm Password</label>
+                    <label className='label-tag' htmlFor="conpassword">Confirm Password</label>
                     <br />
                     <div className="login-password-div">
                         <input value={userData.conpassword}
