@@ -2,6 +2,7 @@ import "./Home.css";
 import Navbar from "../Navbar/Navbar";
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import Slider from "../Slider/Slider";
 
 const Home = () => {
   const typeWriterstrings = [
@@ -45,7 +46,11 @@ const Home = () => {
     {
       name: "Momo",
       link: 'https://images.pexels.com/photos/7363682/pexels-photo-7363682.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    }
+    },
+    {
+      name: "ice cream",
+      link: 'https://images.pexels.com/photos/1343504/pexels-photo-1343504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    },
   ]
 
   return (
@@ -75,6 +80,8 @@ const Home = () => {
             })
           }
         </div>
+
+        <Slider img={imgArr} />
       </div>
     </>
   )
