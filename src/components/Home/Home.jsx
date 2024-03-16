@@ -46,11 +46,7 @@ const Home = () => {
     {
       name: "Momo",
       link: 'https://images.pexels.com/photos/7363682/pexels-photo-7363682.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    },
-    {
-      name: "ice cream",
-      link: 'https://images.pexels.com/photos/1343504/pexels-photo-1343504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    },
+    }
   ]
 
   return (
@@ -80,8 +76,15 @@ const Home = () => {
             })
           }
         </div>
+        <hr />
 
-        <Slider img={imgArr} />
+        <div className="mt-4 recommend">
+          <h4>Recommended Restaurants for You</h4>
+          <Slider img={imgArr} />
+        </div>
+
+        <hr />
+
       </div>
     </>
   )

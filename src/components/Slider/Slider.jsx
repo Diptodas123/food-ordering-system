@@ -2,34 +2,39 @@ import "./Slider.css";
 
 const Slider = ({ img }) => {
 
+    const slider = document.querySelector(".slider");
+    
     const handleLeftSlide = () => {
-        const slider = document.querySelector(".slider");
-        slider.scrollLeft = slider.offsetWidth - 200;
+        const width = slider.offsetWidth;
+        slider.scrollLeft = slider.scrollLeft - width;
     }
 
     const handleRightSlide = () => {
-        const slider = document.querySelector(".slider");
-        slider.scrollLeft += (slider.offsetWidth + 200);
+        const width = slider.offsetWidth;
+        slider.scrollLeft = slider.scrollLeft + width;;
     }
 
     return (
-        <div className="slider-container container">
-            <button id="left-slider-btn" onClick={handleLeftSlide}>&lt;</button>
+        <div className="slider-container container-fluid mt-3">
+            <button id="left-slider-btn" onClick={handleLeftSlide}>
+                <p>&lt;</p>
+            </button>
+            <button id="right-slider-btn" onClick={handleRightSlide}>
+                <p>&gt;</p>
+            </button>
             <div className="slider">
                 {
-                    img.map((curElem, index) => {
+                    img.map((currElem, index) => {
                         return (
-                            <div className="box" key={index}>
-
-                                <figure className="img-box">
-                                    <img className="slider-img" src={curElem.link} alt={curElem.name} />
+                            <div className="card" key={index}>
+                                <figure className="img-figure">
+                                    <img className="slider-img" src={currElem.link} alt={currElem.name} />
                                 </figure>
                             </div>
                         )
                     })
                 }
             </div>
-            <button id="right-slider-btn" onClick={handleRightSlide}>&gt;</button>
         </div>
     )
 }
