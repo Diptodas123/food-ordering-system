@@ -1,18 +1,24 @@
+import React, { useRef } from "react";
 import "./Slider.css";
 
 const Slider = ({ img }) => {
+    const sliderRef = useRef(null);
 
-    const slider = document.querySelector(".slider");
-    
     const handleLeftSlide = () => {
-        const width = slider.offsetWidth;
-        slider.scrollLeft = slider.scrollLeft - width;
-    }
+        const slider = sliderRef.current;
+        if (slider) {
+            const width = slider.offsetWidth;
+            slider.scrollLeft -= width;
+        }
+    };
 
     const handleRightSlide = () => {
-        const width = slider.offsetWidth;
-        slider.scrollLeft = slider.scrollLeft + width;;
-    }
+        const slider = sliderRef.current;
+        if (slider) {
+            const width = slider.offsetWidth;
+            slider.scrollLeft += width;
+        }
+    };
 
     return (
         <div className="slider-container container-fluid mt-3">
@@ -22,21 +28,19 @@ const Slider = ({ img }) => {
             <button id="right-slider-btn" onClick={handleRightSlide}>
                 <p>&gt;</p>
             </button>
-            <div className="slider">
+            <div className="slider" ref={sliderRef}>
                 {
-                    img.map((currElem, index) => {
-                        return (
-                            <div className="card" key={index}>
-                                <figure className="img-figure">
-                                    <img className="slider-img" src={currElem.link} alt={currElem.name} />
-                                </figure>
-                            </div>
-                        )
-                    })
+                    img.map((currElem, index) => (
+                        <div className="card" key={index}>
+                            <figure className="img-figure">
+                                <img className="slider-img" src={currElem.link} alt={currElem.name} />
+                            </figure>
+                        </div>
+                    ))
                 }
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Slider;
