@@ -172,6 +172,14 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        <hr />
+
+        {/* testimonials */}
+        <div className="mt-4 testimonials">
+          <h4>Testimonials</h4>
+          <p>What our customers say about us</p>
+        </div>
       </main>
 
       <Footer />

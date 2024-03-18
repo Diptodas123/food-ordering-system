@@ -51,6 +51,10 @@ img {
     color: white;
 }
 
+.dark-mode hr{
+    background-color: white;
+}
+
 .btn:hover {
     background-color: #3d3d3d;
     color: white;
