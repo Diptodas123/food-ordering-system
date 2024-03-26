@@ -142,6 +142,23 @@
     border-radius: 50%;
 }
 
+.newsletter .newsletter-input{
+    width: 20rem;
+    height: 3rem;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    background-color: rgb(136, 133, 133);
+    margin-right: 1rem;
+}
+
+.newsletter .newsletter-btn{
+    width: 8rem;
+    height: 3rem;
+}
+
 @media (max-width:768px) {
     .testimonials .testimonials-container{
         height: 35rem;

@@ -6,7 +6,7 @@ import Slider from "../Slider/Slider";
 import FeaturedRoundedBoxes from "../Featured/FeaturedRoundedBoxes";
 import Footer from "../Footer/Footer";
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import KebabDiningIcon from '@mui/icons-material/KebabDining';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -26,6 +26,17 @@ const Home = () => {
   ];
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  useEffect(() => {
+    const testimonialsBody = document.querySelector(".testimonials-body");
+    setTimeout(() => {
+      testimonialsBody.style.opacity = 1;
+    }, 500);
+    return (() => {
+      testimonialsBody.style.opacity = 0.5;
+    })
+  }, [testimonialIndex]);
+
 
   const [text] = useTypewriter({
     words: typeWriterstrings,
@@ -84,7 +95,7 @@ const Home = () => {
       name: "Japanese",
       link: "https://www.tastingtable.com/img/gallery/20-japanese-dishes-you-need-to-try-at-least-once/l-intro-1664219638.jpg",
     }
-  ]
+  ];
 
   const newlyAdded = [
     {
@@ -183,7 +194,6 @@ const Home = () => {
         <div className="mt-4 why-container">
           <h4>Why Foodzie?</h4>
           <div className="why">
-
             <div className="row">
               <div className="col-lg-3 col-md-6 col-sm-12">
                 <div className="why-card">
@@ -248,6 +258,15 @@ const Home = () => {
             </div>
             <button className="testimonials-right-btn" onClick={() => setTestimonialIndex((testimonialIndex + 1) % testimonials.length)}>&gt;</button>
           </div>
+        </div>
+
+        <div className="newsletter text-center mt-5 mb-5">
+          <h4>Subscribe to our newsletter</h4>
+          <p>Get exclusive offers, recipes, and inspiration straight to your inbox</p>
+          <form method="POST">
+            <input type="email" placeholder="Enter your email" className="newsletter-input" />
+            <button type="submit" className="p-2 newsletter-btn btn">Subscribe</button>
+          </form>
         </div>
       </main>
 
