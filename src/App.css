@@ -11,7 +11,7 @@
     opacity: 1;
 }
 
-::-ms-input-placeholder{
+::-ms-input-placeholder {
     color: white;
 }
 
@@ -20,7 +20,7 @@ html {
 }
 
 .dark-mode {
-    background-color: #092635;
+    background-color: #10181d;
     color: white;
 }
 
@@ -46,12 +46,12 @@ img {
     transition: all 0.3s ease;
 }
 
-.dark-mode .btn{
+.dark-mode .btn {
     background-color: black;
     color: white;
 }
 
-.dark-mode hr{
+.dark-mode hr {
     background-color: white;
 }
 
