@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import LoadingBar from 'react-top-loading-bar'
 import { useAppContext } from './Context/AppContext';
 import Signup from './components/Signup/Signup';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <LoadingBar height={6} color={'black'} progress={loadingProgress} />
       <Routes>
         <Route path='/' element=<Home />></Route>
