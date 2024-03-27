@@ -11,6 +11,9 @@ import KebabDiningIcon from '@mui/icons-material/KebabDining';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DiscountIcon from '@mui/icons-material/Discount';
+import ToastMessage from "../ToastMessage";
+import { ToastContainer } from "react-toastify";
+import { Email } from "@mui/icons-material";
 
 const Home = () => {
   const typeWriterstrings = [
@@ -26,6 +29,7 @@ const Home = () => {
   ];
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [newsletter, setNewsletter] = useState({ email: "" });
 
   useEffect(() => {
     const testimonialsBody = document.querySelector(".testimonials-body");
@@ -148,6 +152,19 @@ const Home = () => {
     },
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (/^\w+([\.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(newsletter.email)) {
+      ToastMessage({ msg: "Thank you for subscribing to our newsletter!",type: "success" });
+    }else{
+      ToastMessage({ msg: "Invalid Email",type: "error" });
+    }
+  }
+
+  const handleOnChange = (e) => {
+    setNewsletter({ ...newsletter, [e.target.name]: e.target.value });
+  }
+
   return (
     <>
       <Navbar />
@@ -261,13 +278,14 @@ const Home = () => {
         </div>
 
         <div className="newsletter text-center mt-5 mb-5">
-          <h4>Subscribe to our newsletter</h4>
-          <p>Get exclusive offers, recipes, and inspiration straight to your inbox</p>
-          <form method="POST">
-            <input type="email" placeholder="Enter your email" className="newsletter-input" />
+          <h4><Email fontSize="large" /> Subscribe to our newsletter</h4>
+          <p>Get exclusive offers, discounts, and inspiration straight to your inbox</p>
+          <form method="POST" onSubmit={handleSubmit}>
+            <input required name="email" onChange={handleOnChange} value={newsletter.email} type="email" placeholder="Enter your email" className="newsletter-input" />
             <button type="submit" className="p-2 newsletter-btn btn">Subscribe</button>
           </form>
         </div>
+        <ToastContainer />
       </main>
 
       <Footer />

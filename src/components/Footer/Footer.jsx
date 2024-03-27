@@ -36,25 +36,25 @@ const Footer = () => {
                     <div className="flex-column d-flex align-items-center justify-content-center footer-column">
                         <h6 className="footer-heading">Quick Links</h6>
                         <ul className="list-unstyled d-flex align-items-center justify-content-center flex-column">
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"/"}><HomeIcon /> Home</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"/help"}><HelpIcon /> Help</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"/cart"}><ShoppingCartIcon /> Cart</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"/"}><HomeIcon /> Home</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"/help"}><HelpIcon /> Help</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"/cart"}><ShoppingCartIcon /> Cart</Link></li>
                         </ul>
                     </div>
                     <div className="flex-column d-flex align-items-center justify-content-center footer-column">
                         <h6 className="footer-heading">Other Links</h6>
                         <ul className="list-unstyled d-flex align-items-center justify-content-center flex-column">
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"/about"}><InfoIcon /> About</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"/contact"}><ContactEmergency /> Contact</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"/partner-with-us"}><Handshake /> Partner with us</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"/about"}><InfoIcon /> About</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"/contact"}><ContactEmergency /> Contact</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"/partner-with-us"}><Handshake /> Partner with us</Link></li>
                         </ul>
                     </div>
                     <div className="flex-column d-flex align-items-center justify-content-cente footer-column">
                         <h6 className="footer-heading">Contact</h6>
                         <ul className="list-unstyled d-flex align-items-center justify-content-center flex-column">
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"https://www.google.com/maps"}><LocationOn /> 12/3, M.G. Road, Kolkata</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"tel:+91 6234567890"}><Phone /> +91 6234567890</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link style={{ color: "white" }} to={"mailto:foodzie@gmail.com"}><Email /> foodzie@gmail.com</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"https://www.google.com/maps"}><LocationOn /> 12/3, M.G. Road, Kolkata</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"tel:+91 6234567890"}><Phone /> +91 6234567890</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link target="_blank" style={{ color: "white" }} to={"mailto:foodzie@gmail.com"}><Email /> foodzie@gmail.com</Link></li>
                         </ul>
                     </div>
                 </div>
