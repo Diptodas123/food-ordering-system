@@ -146,7 +146,7 @@ const Home = () => {
       <Navbar />
 
       <div className="home-page-heading-container">
-        <img className="home-page-banner" src="img/banner.jpg" alt="banner" />
+        <img className="home-page-banner" src="img/banner.png" alt="banner" />
         <div className="home-page-heading">
           <h1 className="home-page-h1">Welcome to Foodzie</h1>
           <span className="home-page-span">{text}</span>

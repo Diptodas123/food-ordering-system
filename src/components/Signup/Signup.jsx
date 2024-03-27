@@ -33,23 +33,23 @@ const Signup = () => {
             return toastMessage({ msg: "Password must be at least 8 characters long", type: "error" });
         }
 
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signup`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                fname: userData.fname.slice(0, 1).toUpperCase() + userData.fname.slice(1).toLowerCase(),
+                lname: userData.lname.slice(0, 1).toUpperCase() + userData.lname.slice(1).toLowerCase(),
                 email: userData.email,
                 phone: userData.phone,
                 password: userData.password,
-                fname: userData.fname,
-                lname: userData.lname
             })
         });
 
         const data = await response.json();
         if (!data.success) {
-            return toastMessage({ msg: data.message, type: "error" });
+            return toastMessage({ msg: data.error, type: "error" });
         }
 
         toastMessage({ msg: data.message, type: "success" });

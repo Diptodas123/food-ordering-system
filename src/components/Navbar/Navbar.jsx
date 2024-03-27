@@ -16,6 +16,13 @@ const Navbar = () => {
   const [showVerticalNav, setShowVerticalNav] = useState(false);
   const { mode, toggleMode } = useAppContext();
 
+  if (localStorage.getItem("authToken")) {
+
+    const profileImg = document.querySelector(".profile-img");
+    profileImg.addEventListener("mouseover", () => {
+
+    })
+  }
   return (
     <>
       {
@@ -27,7 +34,7 @@ const Navbar = () => {
                 Foodzie
               </NavLink>
             </h2>
-            <img src="img/logo.png" alt="logo" />
+            <img src="img/foodzie_logo.png" alt="logo" />
           </div>
           <ul className="nav-items">
             <NavLink to={"/"} className={location.pathname === '/' ? "nav-item active" : "nav-item"}>
@@ -39,15 +46,23 @@ const Navbar = () => {
             <NavLink to={"/help"} className={location.pathname === '/help' ? "nav-item active" : "nav-item"}>
               <HelpIcon /> Help
             </NavLink>
-            <li className="nav-item" onClick={() => toggleMode()}>
+            <li className="nav-item toggle-btn" onClick={() => toggleMode()}>
               {
                 mode === "light-mode" ? <LightModeIcon /> :
                   <DarkMode />
               }
             </li>
-            <NavLink to={"/login"} className="nav-item">
-              <button className="btn">Log In/Sign Up</button>
-            </NavLink>
+            {
+              !localStorage.getItem("userData") ? (
+                <NavLink to={"/login"} className="nav-item">
+                  <button className="btn">Log In/Sign Up</button>
+                </NavLink>
+              ) : (
+                <NavLink to={'/profile'} className={"nav-item"} style={{ borderBottom: "none" }}>
+                  <img className="profile-img" src={JSON.parse(localStorage.getItem("userData")).image} alt="profile-img" />
+                </NavLink>
+              )
+            }
             <NavLink to={"/cart"} className={location.pathname === '/cart' ? "nav-item active" : "nav-item"}>
               <div className="circle">10</div>
               <ShoppingCartIcon />

@@ -26,12 +26,16 @@
 }
 
 .dark-mode .navbar .logo img {
-    mix-blend-mode: screen; 
+    mix-blend-mode: screen;
 }
 
 .dark-mode .navbar .btn {
     background-color: rgb(216, 197, 197);
     color: black;
+}
+
+.toggle-btn:hover{
+    border-bottom: none;
 }
 
 .dark-mode .navbar .btn:hover {
@@ -77,6 +81,20 @@
 
 .navbar .nav-items .nav-item:hover {
     border-bottom: 1px solid black;
+}
+
+.navbar .nav-items .profile-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar .nav-items .profile-dropdown-container {
+    position: relative;
+    background-color: #3d3d3d;
+    height: 200px;
+    width: 200px;
 }
 
 .dark-mode .navbar .nav-items .nav-item:hover {

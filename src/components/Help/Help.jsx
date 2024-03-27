@@ -1,14 +1,15 @@
 import "./Help.css";
 import Navbar from '../Navbar/Navbar';
-import { Container } from "react-bootstrap";
+import Footer from "../Footer/Footer";
 
 const Help = () => {
   return (
     <div>
       <Navbar />
-      <Container>
-        <h3>Help</h3>
-      </Container>
+      <div className="container help-container">
+        Help
+      </div>
+      <Footer />
     </div>
   )
 }

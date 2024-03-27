@@ -22,7 +22,7 @@ const Footer = () => {
                     <div className="d-flex flex-column footer-column">
                         <div className="footer-logo">
                             <h6>FOODZIE</h6>
-                            <img src="img/logo.png" alt="logo" />
+                            <img src="img/foodzie_logo.png" alt="logo" />
                         </div>
                         <p>Follow Us @</p>
                         <ul className="social-icons gap-3 list-unstyled d-flex justify-content-start align-items-center">
