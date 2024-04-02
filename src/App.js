@@ -19,6 +19,7 @@ import AdminRestaurant from './components/Admin/Main/AdminRestaurants';
 import AdminFinance from './components/Admin/Graph/AdminFinance';
 
 import { ToastContainer } from 'react-toastify';
+import RestaurantRegistration from './components/RestaurantRegistration/RestaurantRegistration';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/login' element=<Login />></Route>
         <Route path='/signup' element=<Signup />></Route>
         <Route path='/profile' element=<Profile />></Route>
+        <Route path='/partner-with-us' element=<RestaurantRegistration />></Route>
 
         <Route path='/AdminDashboard' element={<AdminDashboard />} />
         <Route path='/AdminUsers' element={<AdminUsers />} />
