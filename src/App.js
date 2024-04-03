@@ -37,7 +37,7 @@ function App() {
         <Route path='/login' element=<Login />></Route>
         <Route path='/signup' element=<Signup />></Route>
         <Route path='/profile' element=<Profile />></Route>
-        <Route path='/partner-with-us' element=<RestaurantRegistration />></Route>
+        <Route path='/restaurant-registration' element=<RestaurantRegistration />></Route>
 
         <Route path='/AdminDashboard' element={<AdminDashboard />} />
         <Route path='/AdminUsers' element={<AdminUsers />} />
