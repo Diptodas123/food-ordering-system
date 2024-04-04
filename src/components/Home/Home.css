@@ -39,8 +39,8 @@
     align-items: center;
     width: 100%;
 }
+
 .why .why-card {
-    background-color: #313131;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-bottom: 3px solid green;
     height: 350px;
@@ -53,6 +53,10 @@
     text-align: center;
     align-items: center;
     flex-direction: column;
+}
+
+.dark-mode .why .why-card {
+    background-color: #313131;
 }
 
 .why .why-card .why-card-circle {
