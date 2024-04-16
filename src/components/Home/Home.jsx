@@ -131,9 +131,9 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(newsletter.email)) {
-      toastMessage({ msg: "Thank you for subscribing to our newsletter!",type: "success" });
-    }else{
-      toastMessage({ msg: "Invalid Email",type: "error" });
+      toastMessage({ msg: "Thank you for subscribing to our newsletter!", type: "success" });
+    } else {
+      toastMessage({ msg: "Invalid Email", type: "error" });
     }
   }
 
@@ -204,7 +204,8 @@ const Home = () => {
                   </div>
                   <h6 className="why-card-h6 px-2">Convenient Ordering Experience</h6>
                   <p className="why-card-p px-2">
-                    <p className="why-card-p px-2">Say goodbye to the hassles of traditional food ordering, our user-friendly platform ensures effortless ordering at your fingertips.</p></p>
+                    Say goodbye to the hassles of traditional food ordering, our user-friendly platform ensures effortless ordering at your fingertips.
+                  </p>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6 col-sm-12">
