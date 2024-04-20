@@ -36,7 +36,7 @@ const Navbar = () => {
                 Foodzie
               </NavLink>
             </h2>
-            <img src="img/foodzie_logo.png" alt="logo" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/foodzie-bcbf4.appspot.com/o/foodzie_logo.png?alt=media&token=8ce6cfe2-8ff4-4186-8721-690d25eb7e2c" alt="logo" />
           </div>
           <ul className="nav-items">
             <NavLink to={"/"} className={location.pathname === '/' ? "nav-item active" : "nav-item"}>

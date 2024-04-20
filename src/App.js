@@ -20,6 +20,7 @@ import AdminFinance from './components/Admin/Graph/AdminFinance';
 
 import { ToastContainer } from 'react-toastify';
 import RestaurantRegistration from './components/RestaurantRegistration/RestaurantRegistration';
+import RestaurantPage from './components/RestaurantPage/RestaurantPage';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/signup' element=<Signup />></Route>
         <Route path='/profile' element=<Profile />></Route>
         <Route path='/restaurant-registration' element=<RestaurantRegistration />></Route>
+        <Route path='/restaurant/:restaurantId' element=<RestaurantPage />></Route>
 
         <Route path='/AdminDashboard' element={<AdminDashboard />} />
         <Route path='/AdminUsers' element={<AdminUsers />} />
