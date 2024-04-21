@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 78px;
 }
 
 .home-page-heading-container .home-page-banner {
@@ -41,6 +42,7 @@
 }
 
 .why .why-card {
+    /* background-color: #313131; */
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-bottom: 3px solid green;
     height: 350px;

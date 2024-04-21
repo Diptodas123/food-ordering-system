@@ -1,5 +1,6 @@
 .restaurant-page {
-    min-height: 1000px;
+    min-height: 300px;
+    margin-top: 100px;
 }
 
 .restaurant-page .restaurant-page-image-container {

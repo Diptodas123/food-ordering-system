@@ -71,7 +71,7 @@ const RestaurantPage = () => {
     return (
         <>
             <Navbar />
-            <div className="restaurant-page container mt-4">
+            <div className="restaurant-page container">
                 {
                     loading ?
                         <img src="https://i.pinimg.com/originals/cc/52/d8/cc52d88c5738d491c2175c408d90d1dc.gif" alt="loading..." />

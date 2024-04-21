@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home/Home';
 import Search from './components/Search/Search';
-import Help from './components/Help/Help';
 import Cart from './components/Cart/Cart';
 import Login from './components/Login/Login';
 import LoadingBar from 'react-top-loading-bar'
@@ -17,10 +16,12 @@ import AdminMenu from './components/Admin/Main/AdminMenu';
 import AdminExtras from './components/Admin/Main/AdminExtra';
 import AdminRestaurant from './components/Admin/Main/AdminRestaurants';
 import AdminFinance from './components/Admin/Graph/AdminFinance';
-
 import { ToastContainer } from 'react-toastify';
 import RestaurantRegistration from './components/RestaurantRegistration/RestaurantRegistration';
 import RestaurantPage from './components/RestaurantPage/RestaurantPage';
+import AdminLogin from './components/Admin/Login/AdminLogin';
+import Faq from './components/Help/Faq';
+import About from './components/About/About';
 
 function App() {
 
@@ -33,7 +34,8 @@ function App() {
       <Routes>
         <Route path='/' element=<Home />></Route>
         <Route path='/search' element=<Search />></Route>
-        <Route path='/help' element=<Help />></Route>
+        <Route path='/help' element=<Faq />></Route>
+        <Route path='/about' element=<About />></Route>
         <Route path='/cart' element=<Cart />></Route>
         <Route path='/login' element=<Login />></Route>
         <Route path='/signup' element=<Signup />></Route>
@@ -41,6 +43,7 @@ function App() {
         <Route path='/restaurant-registration' element=<RestaurantRegistration />></Route>
         <Route path='/restaurant/:restaurantId' element=<RestaurantPage />></Route>
 
+        <Route path='/Adminlogin' element={<AdminLogin />} />
         <Route path='/AdminDashboard' element={<AdminDashboard />} />
         <Route path='/AdminUsers' element={<AdminUsers />} />
         <Route path='/AdminOrders' element={<AdminOrders />} />

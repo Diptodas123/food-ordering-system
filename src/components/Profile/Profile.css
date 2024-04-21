@@ -1,3 +1,117 @@
-.profile-container{
-    min-height: 300px;
+.profile-container {
+    margin-top: 100px;
+    height: 500px;
+}
+
+.profile-sidebar {
+    width: 100%;
+}
+
+.profile-left {
+    background-color: #f5f5f5;
+}
+
+.dark-mode .profile-left {
+    background-color: #747474;
+
+}
+
+.profile-right {
+    background-color: #e1e0e0;
+}
+
+.dark-mode .profile-right {
+    background-color: #5f5e5e;
+}
+
+.profile-sidebar-item-profile {
+    &:hover {
+        color: rgb(37, 234, 103);
+        transition: all 0.2s ease;
+    }
+}
+
+.profile-sidebar-item-favourites {
+    &:hover {
+        color: rgb(234, 37, 37);
+        transition: all 0.2s ease;
+    }
+}
+
+.profile-sidebar-item-orders {
+    &:hover {
+        color: rgb(213, 140, 50);
+        transition: all 0.2s ease;
+    }
+}
+
+.profile-sidebar-item-address {
+    &:hover {
+        color: rgb(152, 37, 234);
+        transition: all 0.2s ease;
+    }
+
+}
+
+.dark-mode .modal-dialog-logout {
+    background-color: #565656;
+}
+
+#profile-contact::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+#profile-option-main-submit-button {
+    background-color: #64eaae;
+}
+
+.dark-mode .profile-option-main-container input {
+    color: white;
+}
+
+.favourite-card-main {
+    margin-left: 50px;
+}
+
+
+.profile-option-card {
+    border-radius: 10px;
+    height: 110.5px;
+    background-color: #e8e8e8;
+    width: 260px;
+    margin-top: 40px;
+
+    img {
+        border-radius: 5px;
+    }
+}
+
+.dark-mode .profile-option-card {
+    background-color: #818181;
+}
+
+.favourite-list-main {
+    margin-left: 30px;
+}
+
+.profile-option-list {
+    border: none;
+    border-bottom: 2px solid #000000;
+    height: 151.5px;
+    width: 1000px;
+    margin-top: 20px;
+
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+}
+
+.dark-mode .profile-option-list{
+    border-bottom: 2px solid #ffffff;
+}
+
+.dark-mode .view-icon-profile-favourite-section{
+    color: white;
 }
