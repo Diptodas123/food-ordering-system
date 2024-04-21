@@ -13,6 +13,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DiscountIcon from '@mui/icons-material/Discount';
 import toastMessage from "../ToastMessage";
 import { Email } from "@mui/icons-material";
+import { useUserContext } from "../../Context/UserContext";
 
 const Home = () => {
   const typeWriterstrings = [
@@ -29,6 +30,8 @@ const Home = () => {
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [newsletter, setNewsletter] = useState({ email: "" });
+  const { user } = useUserContext();
+  console.log(user);
 
   useEffect(() => {
     const testimonialsBody = document.querySelector(".testimonials-body");
@@ -156,7 +159,7 @@ const Home = () => {
 
       <main className="container mt-4">
         <div className="featured-iteams">
-          <h4>User, what's on your mind?</h4>
+          <h4>{user ? user.firstName : "User"}, what's on your mind?</h4>
           <FeaturedRoundedBoxes items={imgArr} />
         </div>
 
