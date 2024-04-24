@@ -71,7 +71,7 @@ const ProfileMain = () => {
                             id="profile-first-name"
                             label="First Name"
                             variant="outlined"
-                            defaultValue="Swapnil"
+                            defaultValue={user?.firstName}
                             required
                             sx={{
                                 marginRight: '40px',
@@ -82,7 +82,7 @@ const ProfileMain = () => {
                             id="profile-last-name"
                             label="Last Name"
                             variant="outlined"
-                            defaultValue="Bhattacharya"
+                            defaultValue={user?.lastName}
                             required
                         />
                     </Box>
@@ -110,7 +110,7 @@ const ProfileMain = () => {
                                 id="profile-contact"
                                 label="Contact No."
                                 variant="outlined"
-                                defaultValue="1234567890"
+                                defaultValue={user?.phone}
                                 required
                                 sx={{
                                     marginRight: '40px',
@@ -121,7 +121,7 @@ const ProfileMain = () => {
                                 id="profile-email"
                                 label="Email"
                                 variant="outlined"
-                                defaultValue="hungry@gmail.com"
+                                defaultValue={user?.email}
                                 required
                             />
                         </Box>

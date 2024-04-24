@@ -16,11 +16,13 @@ const RestaurantPage = () => {
     const params = useParams();
 
     const [restaurant, setRestaurant] = useState({});
+    const [reviews, setReviews] = useState([]);
     //eslint-disable-next-line
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [keywords, setKeywords] = useState([]);
     const [component, setComponent] = useState("Details");
+    const [rating, setRating] = useState(0);
 
     const fetchRestaurant = useCallback(async () => {
         try {
@@ -36,10 +38,19 @@ const RestaurantPage = () => {
                 return toastMessage({ msg: data.message, type: "error" });
             }
             setRestaurant(data.restaurant);
+            setReviews(data.reviews);
+
+            //calculate rating
+            const totalRating = data.reviews.reduce((accumulator, review) => {
+                return accumulator + review.rating;
+            }, 0) / data.reviews.length;
+
+            setRating(totalRating);
             setLoading(false);
 
             const keywordsArray = data.restaurant.keywords.split(",");
             setKeywords(keywordsArray);
+
         } catch (error) {
             setError(error.message);
             setLoading(false);
@@ -53,7 +64,7 @@ const RestaurantPage = () => {
             case "Explore":
                 return <RestaurantPageExploreComponent name={restaurant.name} />
             case "Reviews":
-                return <RestaurantPageReviewsComponent name={restaurant.name} />
+                return <RestaurantPageReviewsComponent name={restaurant.name} reviews={reviews} />
             case "Photos":
                 return <RestaurantPagePhotosComponent name={restaurant.name} img={restaurant.imgUrls} />
             case "Menu":
@@ -90,8 +101,8 @@ const RestaurantPage = () => {
                                 <div className="restaurant-page-heading">
                                     <h1>{restaurant.name}</h1>
                                     <div className="restaurant-page-rating d-flex align-items-center justify-content-center">
-                                        <RenderRatings rating={restaurant.rating} />
-                                        <span>({restaurant.reviews} reviews)</span>
+                                        <RenderRatings rating={rating} />
+                                        <span>({reviews.length} reviews)</span>
                                     </div>
                                 </div>
                                 <div className="d-flex">

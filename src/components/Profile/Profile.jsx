@@ -310,7 +310,7 @@ const Profile = () => {
                 >
                     {renderRightContent()}
                 </Box>
-            </Box >
+            </Box>
 
             {/* FOOTER */}
             <Footer />
@@ -368,7 +368,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
 
         </>
     );
