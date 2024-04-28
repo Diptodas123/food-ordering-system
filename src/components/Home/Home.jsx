@@ -31,7 +31,6 @@ const Home = () => {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [newsletter, setNewsletter] = useState({ email: "" });
   const { user } = useUserContext();
-  console.log(user);
 
   useEffect(() => {
     const testimonialsBody = document.querySelector(".testimonials-body");
