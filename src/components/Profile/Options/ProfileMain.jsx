@@ -1,15 +1,63 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../Profile.css"
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Box, Typography, Button } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import { tokens, useMode } from '../../Admin/theme';
 import Avatar from '@mui/material/Avatar';
 import { useUserContext } from "../../../Context/UserContext.js";
+import app from '../../../firebase.js';
 
 const ProfileMain = () => {
     const [theme, colorMode] = useMode();
     const colors = tokens(theme.palette.mode);
-    const {user}=useUserContext();
+    const { user } = useUserContext();
+
+    const [edit, setEdit] = useState(false);
+
+    const [file, setFile] = useState({ image: "" });
+    const [fileError, setFileError] = useState(false);
+    const [filePercentage, setFilePercentage] = useState(0);
+
+    const [formData, setFormData] = useState({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        password: "",
+        conpassword: "",
+    });
+
+    useEffect(() => {
+        if (file.image!== "") {
+            handleFileUpload(file);
+        }
+        console.log(file);
+    }, [file.image]);
+
+    const fileRef = useRef(null);
+    const handleOnChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    const handleFileUpload = (file) => {
+        const storage = getStorage(app);
+        const fileName = new Date().getTime() + file.name;
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on('state_changed', (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setFilePercentage(Math.round(progress));
+        }, (error) => {
+            setFileError(true);
+        }, () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log(downloadURL);
+                setFile({ image: downloadURL });
+            });
+        });
+    }
 
     return (
 
@@ -69,9 +117,11 @@ const ProfileMain = () => {
                         <TextField
                             type='text'
                             id="profile-first-name"
+                            name="firstName"
                             label="First Name"
                             variant="outlined"
-                            defaultValue={user?.firstName}
+                            onChange={edit ? handleOnChange : null}
+                            value={formData.firstName}
                             required
                             sx={{
                                 marginRight: '40px',
@@ -80,9 +130,11 @@ const ProfileMain = () => {
                         <TextField
                             type='text'
                             id="profile-last-name"
+                            name="lastName"
+                            onChange={edit ? handleOnChange : null}
                             label="Last Name"
                             variant="outlined"
-                            defaultValue={user?.lastName}
+                            value={formData.lastName}
                             required
                         />
                     </Box>
@@ -109,8 +161,10 @@ const ProfileMain = () => {
                                 type='number'
                                 id="profile-contact"
                                 label="Contact No."
+                                name='phone'
                                 variant="outlined"
-                                defaultValue={user?.phone}
+                                onChange={edit ? handleOnChange : null}
+                                value={formData.phone}
                                 required
                                 sx={{
                                     marginRight: '40px',
@@ -119,9 +173,11 @@ const ProfileMain = () => {
                             <TextField
                                 type='email'
                                 id="profile-email"
+                                name='email'
                                 label="Email"
+                                onChange={edit ? handleOnChange : null}
                                 variant="outlined"
-                                defaultValue={user?.email}
+                                value={formData.email}
                                 required
                             />
                         </Box>
@@ -148,7 +204,7 @@ const ProfileMain = () => {
 
                             <TextField
                                 id="profile-address"
-                                type='email'
+                                type='text'
                                 variant="outlined"
                                 multiline
                                 rows={6}
@@ -178,9 +234,11 @@ const ProfileMain = () => {
                             alignItems: 'center',
                         }}
                     >
+                        <input type='file' accept='image/*' id='profile-image-input' ref={fileRef} hidden onChange={(e) => setFile(e.target.files[0])} />
                         <Avatar
+                            onClick={() => fileRef.current.click()}
                             alt='User Main Image'
-                            src={user.image}
+                            src={file.image || user.image}
                             sx={{
                                 height: 200,
                                 width: 200,
@@ -193,6 +251,7 @@ const ProfileMain = () => {
                     <Box className="profile-option-main-form-button">
                         <Button
                             type='submit'
+                            onClick={() => setEdit(!edit)}
                             variant="contained"
                             id='profile-option-main-submit-button'
                             sx={{
@@ -200,7 +259,7 @@ const ProfileMain = () => {
                                 p: '12px 50px',
                             }}
                         >
-                            Edit
+                            {edit ? 'Save' : 'Edit'}
                         </Button>
                     </Box>
                 </Box>
