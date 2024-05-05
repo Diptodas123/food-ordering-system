@@ -15,7 +15,8 @@ const ProfileMain = () => {
 
     const [edit, setEdit] = useState(false);
 
-    const [file, setFile] = useState({ image: "" });
+    const [file, setFile] = useState(null);
+    const [fileURL, setFileURL] = useState(null);
     const [fileError, setFileError] = useState(false);
     const [filePercentage, setFilePercentage] = useState(0);
 
@@ -29,11 +30,11 @@ const ProfileMain = () => {
     });
 
     useEffect(() => {
-        if (file.image!== "") {
+        if (file) {
             handleFileUpload(file);
         }
         console.log(file);
-    }, [file.image]);
+    }, [file]);
 
     const fileRef = useRef(null);
     const handleOnChange = (e) => {
@@ -41,23 +42,43 @@ const ProfileMain = () => {
     }
 
     const handleFileUpload = (file) => {
+        if (!file) {
+            console.error("No file selected.");
+            return;
+        }
+
         const storage = getStorage(app);
         const fileName = new Date().getTime() + file.name;
         const storageRef = ref(storage, fileName);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
-        uploadTask.on('state_changed', (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setFilePercentage(Math.round(progress));
-        }, (error) => {
-            setFileError(true);
-        }, () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log(downloadURL);
-                setFile({ image: downloadURL });
-            });
-        });
-    }
+        console.log("Upload task created.");
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload progress:", progress);
+                setFilePercentage(Math.round(progress));
+            },
+            (error) => {
+                console.error("Error uploading file:", error);
+                setFileError(true);
+            },
+            () => {
+                console.log("Upload completed.");
+                getDownloadURL(uploadTask.snapshot.ref)
+                    .then((downloadURL) => {
+                        console.log("File uploaded successfully. URL:", downloadURL);
+                        setFileURL(downloadURL);
+                    })
+                    .catch((error) => {
+                        console.error("Error retrieving download URL:", error);
+                        setFileError(true);
+                    });
+            }
+        );
+    };
+
 
     return (
 
@@ -238,7 +259,7 @@ const ProfileMain = () => {
                         <Avatar
                             onClick={() => fileRef.current.click()}
                             alt='User Main Image'
-                            src={file.image || user.image}
+                            src={fileURL || user.image}
                             sx={{
                                 height: 200,
                                 width: 200,
@@ -246,7 +267,8 @@ const ProfileMain = () => {
                             }}
                         />
                     </Box>
-
+                    <span className='text-danger'>{fileError ? 'Something went wrong' : null}</span>
+                    {!fileError && <span className='text-success'>{filePercentage === 100 ? 'Image uploaded successfully' : null}</span>}
                     {/* SUBMIT BUTTON */}
                     <Box className="profile-option-main-form-button">
                         <Button
