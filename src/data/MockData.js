@@ -26,6 +26,39 @@ export const mockPieData = [
 ]
 
 
+export const mockProductRating = [
+    {
+        id: 1,
+        name: 'Food1',
+        value: 4.5
+    },
+    {
+        id: 2,
+        name: 'Food2',
+        value: 4
+    },
+    {
+        id: 3,
+        name: 'Food3',
+        value: 3.5
+    },
+    {
+        id: 4,
+        name: 'Food4',
+        value: 3
+    },
+    {
+        id: 5,
+        name: 'Food5',
+        value: 2
+    },
+    {
+        id: 6,
+        name: 'Food6',
+        value: 1.5
+    },
+
+]
 export const mockRestaurantRating = [
     {
         id: 1,
@@ -348,6 +381,190 @@ export const mockFavourites = [
         state: "West Bengal",
         pincode: "700019",
         rating: 4,
+    },
+
+]
+
+export const mockOrders = [
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
+    },
+    {
+        id: "6372e046f52e37ef85fe2c5e",
+        img: "https://s3-ap-south-1.amazonaws.com/betterbutterbucket-silver/debomita-chatterjee20180516172647354.jpeg",
+        orderTime: "Sun, Feb 4, 2024, 02:20 PM",
+        restaurantName: "Restaurant 1",
+        foodItems: [
+            "Chicken Biryani",
+            "Paneer Tikka",
+            "Lassi(300 ml) x 1",
+        ],
+        location: "dum dum",
+        city: "Kolkata",
+        state: "West Bengal",
+        pincode: "700089",
+        price: "200",
+        deliverTime: "Sun, Feb 4, 2024, 03:00 PM",
+        delivered: true,
     },
 ]
 

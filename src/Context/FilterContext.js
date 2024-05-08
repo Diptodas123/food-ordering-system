@@ -42,11 +42,15 @@ const FilterProvider = ({ children }) => {
         dispatch({ type: "SET_LIST_VIEW" });
     };
 
+    const sorting = () => {
+
+    }
+
     useEffect(() => {
         getallRestaurants();
     }, []);
 
-    return <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
+    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting }}>
         {children}
     </FilterContext.Provider>
 }

@@ -114,11 +114,11 @@ const ProfileMain = () => {
                 <Box className='profile-option-main-form-left'
                     sx={{
                         height: '100%',
-                        flex: 1,
+                        flex: 4,
                     }}
                 >
                     <Box sx={{
-                        marginTop: '30px',
+                        marginTop: '58px',
                         marginLeft: '50px',
                         display: 'flex',
                         alignContent: 'center',
@@ -128,7 +128,7 @@ const ProfileMain = () => {
                         {/* FORM LABEL */}
                         <Typography variant='h6'
                             sx={{
-                                marginRight: '30px'
+                                marginRight: '44px'
                             }}
                         >
                             Name:
@@ -146,6 +146,7 @@ const ProfileMain = () => {
                             required
                             sx={{
                                 marginRight: '40px',
+                                width: '210px',
                             }}
                         />
                         <TextField
@@ -157,10 +158,13 @@ const ProfileMain = () => {
                             variant="outlined"
                             value={formData.lastName}
                             required
+                            sx={{
+                                width: '210px',
+                            }}
                         />
                     </Box>
                     <Box sx={{
-                        marginTop: '30px',
+                        marginTop: '58px',
                         marginLeft: '50px',
                         display: 'flex',
                         alignContent: 'center',
@@ -170,7 +174,7 @@ const ProfileMain = () => {
                         {/* FORM LABEL */}
                         <Typography variant='h6'
                             sx={{
-                                marginRight: '10px'
+                                marginRight: '25px'
                             }}
                         >
                             Account:
@@ -189,6 +193,8 @@ const ProfileMain = () => {
                                 required
                                 sx={{
                                     marginRight: '40px',
+                                    width: '210px',
+
                                 }}
                             />
                             <TextField
@@ -200,13 +206,16 @@ const ProfileMain = () => {
                                 variant="outlined"
                                 value={formData.email}
                                 required
+                                sx={{
+                                    width: '210px',
+                                }}
                             />
                         </Box>
                     </Box>
 
                     {/* ROW 3 */}
                     <Box sx={{
-                        marginTop: '30px',
+                        marginTop: '58px',
                         marginLeft: '50px',
                         display: 'flex',
                         alignContent: 'center',
@@ -216,25 +225,37 @@ const ProfileMain = () => {
                         {/* FORM LABEL */}
                         <Typography variant='h6'
                             sx={{
-                                marginRight: '10px'
+                                marginRight: '10px',
                             }}
                         >
-                            Address:
+                            Password:
                         </Typography>
                         <Box>
-
                             <TextField
-                                id="profile-address"
-                                type='text'
+                                type='password'
+                                id="profile-password"
+                                name='password'
+                                label="Password"
+                                onChange={edit ? handleOnChange : null}
                                 variant="outlined"
-                                multiline
-                                rows={6}
+                                value={formData.password}
                                 required
                                 sx={{
-                                    width: '485px',
+                                    marginRight: '40px',
+                                    width: '210px',
                                 }}
-                                InputLabelProps={{
-                                    shrink: true,
+                            />
+                            <TextField
+                                type='password'
+                                id="profile-password"
+                                name='conpassword'
+                                label="Confirm Password"
+                                onChange={edit ? handleOnChange : null}
+                                variant="outlined"
+                                value={formData.conpassword}
+                                required
+                                sx={{
+                                    width: '210px',
                                 }}
                             />
 
@@ -255,7 +276,14 @@ const ProfileMain = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <input type='file' accept='image/*' id='profile-image-input' ref={fileRef} hidden onChange={(e) => setFile(e.target.files[0])} />
+                        <input
+                            type='file'
+                            accept='image/*'
+                            id='profile-image-input'
+                            ref={fileRef}
+                            hidden
+                            onChange={(e) => setFile(e.target.files[0])}
+                        />
                         <Avatar
                             onClick={() => fileRef.current.click()}
                             alt='User Main Image'
@@ -264,6 +292,15 @@ const ProfileMain = () => {
                                 height: 200,
                                 width: 200,
                                 border: '2px solid ' + colors.greenAccent[500],
+                                cursor: 'pointer',
+                                transition: 'all 0.1s ease-in-out',
+                                "&:hover": {
+                                    border: '2px solid ' + colors.greenAccent[600],
+                                },
+                                '&:hover img': {
+                                    transform: 'scale(1.1)',
+                                    transition: 'all ease-in-out',
+                                }
                             }}
                         />
                     </Box>

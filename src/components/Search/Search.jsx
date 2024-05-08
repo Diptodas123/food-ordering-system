@@ -12,15 +12,12 @@ const Search = () => {
     <div>
       <Navbar />
       <div className="container search-container">
-        <div>
+        <div className="first-container">
           <FilterSection />
         </div>
 
-        <div>
+        <div className="second-container">
           <SortingSection />
-        </div>
-
-        <div>
           <SearchResults />
         </div>
       </div>

@@ -1,8 +1,10 @@
 import React from 'react'
-
+import './SearchResults.css'
 const SearchResults = () => {
   return (
-    <div>SearchResults</div>
+    <div className='container search-results-container'>
+
+    </div>
   )
 }
 

@@ -1,0 +1,10 @@
+.sorting-section-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sorting-section-container .btn-container{
+    display: flex;
+    gap: 0.5rem;
+}

@@ -1,0 +1,14 @@
+.filter-section-container{
+    margin-top: 1rem;
+    margin-bottom: 1rem
+}
+
+.filter-section-container .search-input{
+    padding: 0.4rem;
+    width: 95%;
+}
+
+.filter-section-container .cuisine-container{
+    margin-top: 1rem;
+    margin-bottom: 1rem
+}
