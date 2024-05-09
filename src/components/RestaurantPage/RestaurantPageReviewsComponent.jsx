@@ -67,9 +67,9 @@ const RestaurantPageReviewsComponent = ({ name, reviews }) => {
             return (
               <div key={index} className="review-box">
                 <div className="d-flex align-items-center">
-                  <img src={review.user.image} alt={"display-img"} style={{ width: "50px", height: "50px", borderRadius: "50%" }}></img>
+                  <img src={review.user?.image} alt={"display-img"} style={{ width: "50px", height: "50px", borderRadius: "50%" }}></img>
                   <div className="px-3">
-                    <h5>{review.user.firstName + " " + review.user.lastName}</h5>
+                    <h5>{review.user?.firstName + " " + review.user?.lastName}</h5>
                     <span>{Intl.DateTimeFormat('en-IN').format(new Date(review.createdAt))}</span>
                   </div>
                 </div>

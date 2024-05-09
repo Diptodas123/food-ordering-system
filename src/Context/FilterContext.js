@@ -8,14 +8,13 @@ const initialState = {
     allRestaurants: [],
     filterRestaurants: [],
     gridView: true,
-    sortingValue: "ascending",
+    sortingValue: "newest",
     filter: {
         text: "",
         cuisine: "all",
         maxPrice: 0,
         minPrice: 0,
         price: 0,
-        rating: 0
     }
 }
 
@@ -46,11 +45,15 @@ const FilterProvider = ({ children }) => {
 
     }
 
+    const updateFilterValue = () => {
+
+    }
+
     useEffect(() => {
         getallRestaurants();
     }, []);
 
-    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting }}>
+    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue }}>
         {children}
     </FilterContext.Provider>
 }

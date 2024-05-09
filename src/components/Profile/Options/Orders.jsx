@@ -31,7 +31,7 @@ const Orders = () => {
                         orders.map((value) => {
                             const { id, img, variety, restaurantName, foodItems, location, orderTime, city, state, pincode, deliverTime, delivered, price } = value
                             return (
-                                <Box className='profile-orders-list-main'
+                                <Box key={id} className='profile-orders-list-main'
                                     sx={{
                                         mt: 2,
                                     }}

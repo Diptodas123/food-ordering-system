@@ -33,7 +33,6 @@ const ProfileMain = () => {
         if (file) {
             handleFileUpload(file);
         }
-        console.log(file);
     }, [file]);
 
     const fileRef = useRef(null);

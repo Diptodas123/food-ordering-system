@@ -3,7 +3,7 @@ import "./FilterSection.css"
 import { useFilterContext } from '../../Context/FilterContext';
 import FormatPrice from '../../Helper/FormatPrice';
 const FilterSection = () => {
-  const { filter: { text,maxPrice,minPrice,price } } = useFilterContext();
+  const { filter: { text,maxPrice,minPrice,price,updateFilterValue } } = useFilterContext();
 
   return (
     <section className="container filter-section-container">
@@ -14,6 +14,7 @@ const FilterSection = () => {
           placeholder="Search..."
           className="search-input"
           value={text}
+          onChange={updateFilterValue}
         />
       </form>
 

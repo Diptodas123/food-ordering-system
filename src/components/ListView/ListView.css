@@ -1,0 +1,14 @@
+.list-view {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.list-view .card {
+    border: 2px solid green;
+    padding: 20px;
+    margin: 0 auto 20px auto;
+    height: 230px;
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
