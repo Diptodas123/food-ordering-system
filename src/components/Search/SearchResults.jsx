@@ -4,8 +4,8 @@ import { useFilterContext } from '../../Context/FilterContext'
 import ListView from '../ListView/ListView'
 import GridView from '../GridView/GridView'
 const SearchResults = () => {
-  const { allRestaurants, filterRestaurants, gridView } = useFilterContext()
-  if (allRestaurants.length === 0) {
+  const { filterRestaurants, gridView } = useFilterContext()
+  if (filterRestaurants.length === 0) {
     return (
       <div className='container search-results-container'>
         <img style={{ display: 'block', margin: '1rem auto 0 auto', height: "300px", width: "300px" }}
@@ -17,11 +17,11 @@ const SearchResults = () => {
 
   if (gridView) {
     return (
-      <GridView filterRestaurants={allRestaurants} />
+      <GridView filterRestaurants={filterRestaurants} />
     )
   } else {
     return (
-      <ListView filterRestaurants={allRestaurants} />
+      <ListView filterRestaurants={filterRestaurants} />
     )
   }
 }

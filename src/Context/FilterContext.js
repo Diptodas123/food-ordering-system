@@ -41,19 +41,33 @@ const FilterProvider = ({ children }) => {
         dispatch({ type: "SET_LIST_VIEW" });
     };
 
-    const sorting = () => {
+    const sorting = (event) => {
+        const userValue = event.target.value;
 
+        dispatch({ type: "GET_SORTING_VALUE", payload: userValue });
     }
 
-    const updateFilterValue = () => {
+    const updateFilterValue = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
 
+        dispatch({ type: "UPDATE_FILTER_VALUE", payload: { name, value } });
     }
 
+    const clearFilter = () => {
+        dispatch({ type: "CLEAR_FILTER" });
+    }
+
+    useEffect(() => {
+        dispatch({ type: "FILTER_RESTAURANTS" });
+        dispatch({ type: "SORTING_RESTAURANTS" });
+    },[state.sortingValue, state.filter]);
+    
     useEffect(() => {
         getallRestaurants();
     }, []);
 
-    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue }}>
+    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue, clearFilter }}>
         {children}
     </FilterContext.Provider>
 }
