@@ -4,7 +4,7 @@ import { useFilterContext } from '../../Context/FilterContext'
 import ListView from '../ListView/ListView'
 import GridView from '../GridView/GridView'
 const SearchResults = () => {
-  const { filterRestaurants, gridView } = useFilterContext()
+  const { filterRestaurants, filterDishes, gridView, filter: { searchBy } } = useFilterContext()
   if (filterRestaurants.length === 0) {
     return (
       <div className='container search-results-container'>
@@ -17,11 +17,11 @@ const SearchResults = () => {
 
   if (gridView) {
     return (
-      <GridView filterRestaurants={filterRestaurants} />
+      <GridView data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
     )
   } else {
     return (
-      <ListView filterRestaurants={filterRestaurants} />
+      <ListView data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
     )
   }
 }

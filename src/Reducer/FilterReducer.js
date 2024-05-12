@@ -6,11 +6,27 @@ const reducer = (state, action) => {
                 isLoading: true
             };
         case "SET_ALL_RESTAURANTS":
+            let { restaurants, rating } = action.payload;
+            restaurants = restaurants.map((item) => {
+                rating = rating.map((currentElement) => {
+                    if (currentElement._id === item._id) {
+                        return currentElement.avgRating
+                    } else {
+                        return 0
+                    }
+                })
+
+                return {
+                    ...item,
+                    rating: rating[0]
+                }
+            });
+
             return {
                 ...state,
                 isLoading: false,
-                allRestaurants: action.payload,
-                filterRestaurants: action.payload
+                allRestaurants: restaurants,
+                filterRestaurants: restaurants,
             };
         case "SET_GRID_VIEW":
             return {
@@ -38,26 +54,31 @@ const reducer = (state, action) => {
             };
 
         case "FILTER_RESTAURANTS":
-            const { text, cuisine, maxPrice, minPrice, price } = state.filter;
-            let tempRestaurant = [...state.allRestaurants];
-            if (text) {
-                tempRestaurant = tempRestaurant.filter((item) => item.name.toLowerCase().includes(text));
+            const { text, cuisine, maxPrice, minPrice, price, searchBy } = state.filter;
+            let tempData;
+            if (searchBy === "Restaurants") {
+                tempData = [...state.allRestaurants];
+            } else {
+                tempData = [...state.allDishes];
             }
-            if (cuisine !== "all") {
-                tempRestaurant = tempRestaurant.filter((item) => item.cuisine.includes(cuisine));
+            if (text) {
+                tempData = tempData.filter((item) => item.name.toLowerCase().includes(text));
+            }
+            if (cuisine !== "All") {
+                tempData = tempData.filter((item) => item.cuisine === cuisine);
             }
             if (maxPrice !== 0) {
-                tempRestaurant = tempRestaurant.filter((item) => item.price <= maxPrice);
+                tempData = tempData.filter((item) => item.price <= maxPrice);
             }
             if (minPrice !== 0) {
-                tempRestaurant = tempRestaurant.filter((item) => item.price >= minPrice);
+                tempData = tempData.filter((item) => item.price >= minPrice);
             }
             if (price !== 0) {
-                tempRestaurant = tempRestaurant.filter((item) => item.price <= price);
+                tempData = tempData.filter((item) => item.price <= price);
             }
             return {
                 ...state,
-                filterRestaurants: tempRestaurant
+                filterRestaurants: tempData
             }
 
         case "SORTING_RESTAURANTS":
@@ -73,7 +94,7 @@ const reducer = (state, action) => {
                     case "highRating":
                         return b.rating - a.rating;
                     case "lowRating":
-                        return a.price - b.price;
+                        return a.rating - b.rating;
                     default:
                         return;
                 }
@@ -88,10 +109,13 @@ const reducer = (state, action) => {
         case "CLEAR_FILTER":
             return {
                 ...state,
+                filterRestaurants: state.allRestaurants,
+                filterDishes: state.allDishes,
+                searchBy: "Restaurants",
                 filter: {
                     ...state.filter,
                     text: "",
-                    cuisine: "all",
+                    cuisine: "All",
                     maxPrice: 0,
                     minPrice: 0,
                     price: 0,

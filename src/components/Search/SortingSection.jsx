@@ -5,7 +5,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import "./SortingSection.css"
 import MenuIcon from '@mui/icons-material/Menu';
 const SortingSection = () => {
-  const { filterRestaurants, setGridView, setListView, sorting, gridView, } = useFilterContext();
+  const { filterRestaurants, filterDishes, setGridView, setListView, sorting, gridView, filter: { searchBy } } = useFilterContext();
   return (
     <section className='sorting-section-container px-3 mt-4'>
       <div className='btn-container'>
@@ -13,7 +13,7 @@ const SortingSection = () => {
         <button className={!gridView ? "active" : ""} onClick={() => setListView()}><MenuIcon /></button>
       </div>
       <div>
-        <p className='mt-2'>{filterRestaurants.length} results found</p>
+        <p className='mt-2'>{searchBy === "Restaurants" ? `${filterRestaurants.length} restaurants` : `${filterDishes.length} dishes`} found</p>
       </div>
       <div>
         <form className='sorting-form' action="">

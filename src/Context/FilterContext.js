@@ -6,12 +6,15 @@ const FilterContext = createContext();
 const initialState = {
     isLoading: false,
     allRestaurants: [],
+    allDishes: [],
+    filterDishes: [],
     filterRestaurants: [],
     gridView: true,
     sortingValue: "newest",
     filter: {
         text: "",
-        cuisine: "all",
+        searchBy: "Restaurants",
+        cuisine: "All",
         maxPrice: 0,
         minPrice: 0,
         price: 0,
@@ -27,7 +30,7 @@ const FilterProvider = ({ children }) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/restaurant/getallRestaurants`);
             const data = await response.json();
-            dispatch({ type: "SET_ALL_RESTAURANTS", payload: data.restaurants });
+            dispatch({ type: "SET_ALL_RESTAURANTS", payload: { restaurants: data.restaurants, rating: data.rating } });
         } catch (error) {
             console.log(error);
         }
@@ -61,8 +64,8 @@ const FilterProvider = ({ children }) => {
     useEffect(() => {
         dispatch({ type: "FILTER_RESTAURANTS" });
         dispatch({ type: "SORTING_RESTAURANTS" });
-    },[state.sortingValue, state.filter]);
-    
+    }, [state.sortingValue, state.filter]);
+
     useEffect(() => {
         getallRestaurants();
     }, []);
