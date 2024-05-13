@@ -15,6 +15,7 @@ const initialState = {
         text: "",
         searchBy: "Restaurants",
         cuisine: "All",
+        foodType: "All",
         maxPrice: 0,
         minPrice: 0,
         price: 0,
@@ -59,6 +60,10 @@ const FilterProvider = ({ children }) => {
 
     const clearFilter = () => {
         dispatch({ type: "CLEAR_FILTER" });
+        dispatch({ type: "SET_LOADING" })
+        setTimeout(() => {
+            dispatch({ type: "UNSET_LOADING" })
+        }, 1000);
     }
 
     useEffect(() => {

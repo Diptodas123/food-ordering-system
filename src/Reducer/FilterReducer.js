@@ -5,6 +5,11 @@ const reducer = (state, action) => {
                 ...state,
                 isLoading: true
             };
+        case "UNSET_LOADING":
+            return {
+                ...state,
+                isLoading: false
+            }
         case "SET_ALL_RESTAURANTS":
             let { restaurants, rating } = action.payload;
             restaurants = restaurants.map((item) => {
@@ -54,7 +59,7 @@ const reducer = (state, action) => {
             };
 
         case "FILTER_RESTAURANTS":
-            const { text, cuisine, maxPrice, minPrice, price, searchBy } = state.filter;
+            const { text, cuisine, maxPrice, minPrice, price, searchBy, foodType } = state.filter;
             let tempData;
             if (searchBy === "Restaurants") {
                 tempData = [...state.allRestaurants];
@@ -63,6 +68,9 @@ const reducer = (state, action) => {
             }
             if (text) {
                 tempData = tempData.filter((item) => item.name.toLowerCase().includes(text));
+            }
+            if (foodType !== "All" && searchBy === "Dishes") {
+                tempData = tempData.filter((item) => item.foodType === foodType);
             }
             if (cuisine !== "All") {
                 tempData = tempData.filter((item) => item.cuisine === cuisine);
@@ -116,6 +124,7 @@ const reducer = (state, action) => {
                     ...state.filter,
                     text: "",
                     cuisine: "All",
+                    foodType: "All",
                     maxPrice: 0,
                     minPrice: 0,
                     price: 0,
