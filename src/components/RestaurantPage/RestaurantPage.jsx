@@ -5,7 +5,7 @@ import "./RestaurantPage.css";
 import { useCallback, useEffect, useState } from "react";
 import toastMessage from "../ToastMessage";
 import KeywordBox from "../KeywordBox";
-import RenderRatings from "../RenderRatings";
+import RenderRatings from "../../Helper/RenderRatings";
 import RestaurantPageExploreComponent from "./RestaurantPageExploreComponent";
 import RestaurantPageDetailsComponent from "./RestaurantPageDetailsComponent";
 import RestaurantPageReviewsComponent from "./RestaurantPageReviewsComponent";
@@ -101,7 +101,7 @@ const RestaurantPage = () => {
                                 <div className="restaurant-page-heading">
                                     <h1>{restaurant.name}</h1>
                                     <div className="restaurant-page-rating d-flex align-items-center justify-content-center">
-                                        <RenderRatings rating={rating} />
+                                        <RenderRatings rating={rating} size="large" />
                                         <span>({reviews.length} reviews)</span>
                                     </div>
                                 </div>

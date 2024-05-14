@@ -1,7 +1,9 @@
 import { useFilterContext } from '../../Context/FilterContext';
 import './GridView.css';
+import FormatPrice from '../../Helper/FormatPrice';
 import GridSkeleton from './GridSkeleton';
 import Star from '@mui/icons-material/Star';
+
 const GridView = ({ data = [] }) => {
     const { isLoading } = useFilterContext();
     if (isLoading) {
@@ -11,6 +13,7 @@ const GridView = ({ data = [] }) => {
             <div className='container grid-view'>
                 {
                     data.map((curElem, index) => {
+                        const address = curElem.address.split(',');
                         return (
                             <div key={index} className='card'>
                                 <figure className='card-image-container'>
@@ -26,17 +29,27 @@ const GridView = ({ data = [] }) => {
                                                 : null
                                             }
                                         >
-                                            <p style={{ marginBottom: 0 }}>
-                                                {curElem.rating === 0 ? "New" : curElem.rating}
-                                            </p>
+                                            {
+                                                curElem.rating === 0 ?
+                                                    <p style={{ marginBottom: 0, color: 'green' }}>New</p>
+                                                    :
+                                                    <p style={{ marginBottom: 0 }}>
+                                                        {curElem.rating}
+                                                    </p>
+                                            }
                                             <Star fontSize='small' className='card-star' />
                                         </div>
                                     </div>
                                 </figure>
-                                <div className='second-container'>
-                                    <p style={{ marginBottom: 0 }}>{curElem.keywords.slice(0, 24)}...</p>
-                                    <span>1000 for two</span>
+                                <div className='grid-card-footer'>
+                                    <p>{curElem.keywords.slice(0, 20)}...</p>
+                                    <p><FormatPrice price={1000} /> for two</p>
                                 </div>
+                                <p className='grid-card-address'>
+                                    {
+                                        address.length === 1 ? `${address[0]}, ${curElem.city}` : `${address[1]}, ${curElem.city}`
+                                    }
+                                </p>
                             </div>
                         )
                     })

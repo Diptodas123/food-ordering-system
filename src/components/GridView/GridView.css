@@ -1,16 +1,27 @@
 .grid-view {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-gap: 18px;
     margin-top: 60px;
     margin-bottom: 60px;
 }
 
 .grid-view .card {
-    border: 2px solid green;
-    height: 260px;
-    width: 260px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: none;
+    height: 270px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    width: 270px;
+    padding: 0.5rem;
+}
+
+.grid-view .card:hover {
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.02);
+}
+
+.dark-mode .grid-view .card{
+    background-color: #090e13;
 }
 
 .grid-view .card .card-image-container {
@@ -40,7 +51,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.7rem;
+    padding: 0.4rem;
 }
 
 .grid-view .card .card-image-container .figcaption-container .card-figcaption {
@@ -62,19 +73,25 @@
     font-size: small;
 }
 
-.grid-view .card .second-container {
+.grid-view .card .grid-card-footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 30%;
-    width:  260px;
+    justify-content: space-around;
+    height: 10%;
+    width: 100%;
+    font-size: 0.8rem;
+    color: rgb(71, 70, 70)
 }
 
-.grid-view .card .second-container p{
-    padding: 0.7rem;
-    margin-top: 0.5rem;
+.grid-view .card .grid-card-footer p{
+    padding-top: 2.5rem;
+}
+
+.grid-view .card .grid-card-address {
     font-size: 0.8rem;
-    width: 50%;
+    height: 10%;
+    padding: 0.5rem;
+    color: rgb(93, 93, 93)
 }
 
 .grid-view .card .card-image-container .figcaption-container .card-rating-container .card-star {
