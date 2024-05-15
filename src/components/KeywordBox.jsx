@@ -8,7 +8,7 @@ const KeywordBox = ({ keyword }) => {
     const style = {
         color: localStorage.getItem("mode") === "dark-mode" ? colors.primary[100] : colors.primary[500],
         backgroundColor: localStorage.getItem("mode") === "dark-mode" ? colors.primary[900] : colors.primary[100],
-        padding: "5px 10px",
+        padding: "5px 8px",
         borderRadius: "5px",
         margin: "0 5px",
         textOverflow: "ellipsis",
@@ -17,7 +17,7 @@ const KeywordBox = ({ keyword }) => {
     }
     return (
         <div className="keyword-box">
-            <p style={style}>{keyword}</p>
+            <div style={style}>{keyword}</div>
         </div>
     )
 }
