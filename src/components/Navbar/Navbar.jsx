@@ -17,14 +17,7 @@ const Navbar = () => {
   const [showVerticalNav, setShowVerticalNav] = useState(false);
   const { mode, toggleMode } = useAppContext();
   const {user}=useUserContext();
-
-  if (localStorage.getItem("authToken")) {
-
-    const profileImg = document.querySelector(".profile-img");
-    profileImg.addEventListener("mouseover", () => {
-
-    })
-  }
+  
   return (
     <>
       {
@@ -48,7 +41,7 @@ const Navbar = () => {
             <NavLink to={"/help"} className={location.pathname === '/help' ? "nav-item active" : "nav-item"}>
               <HelpIcon /> Help
             </NavLink>
-            <li className="nav-item toggle-btn" onClick={() => toggleMode()}>
+            <li className="nav-item toggle-btn" style={{borderBottom:"none" }} onClick={() => toggleMode()}>
               {
                 mode === "light-mode" ? <LightModeIcon /> :
                   <DarkMode />

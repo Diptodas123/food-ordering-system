@@ -25,7 +25,6 @@ const initialState = {
 const FilterProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
-
     const getallRestaurants = async () => {
         dispatch({ type: "SET_LOADING" });
         try {

@@ -22,6 +22,7 @@ import RestaurantPage from './components/RestaurantPage/RestaurantPage';
 import AdminLogin from './components/Admin/Login/AdminLogin';
 import Faq from './components/Help/Faq';
 import About from './components/About/About';
+import Contact from './components/Contact/Contact';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
         <Route path='/login' element=<Login />></Route>
         <Route path='/signup' element=<Signup />></Route>
         <Route path='/profile' element=<Profile />></Route>
+        <Route path='/contact' element=<Contact />></Route>
         <Route path='/restaurant-registration' element=<RestaurantRegistration />></Route>
         <Route path='/restaurant/:restaurantId' element=<RestaurantPage />></Route>
 
