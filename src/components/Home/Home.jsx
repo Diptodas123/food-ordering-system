@@ -14,6 +14,7 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import toastMessage from "../ToastMessage";
 import { Email } from "@mui/icons-material";
 import { useUserContext } from "../../Context/UserContext";
+import { useFilterContext } from "../../Context/FilterContext";
 
 const Home = () => {
   const typeWriterstrings = [
@@ -74,6 +75,9 @@ const Home = () => {
       link: 'https://images.pexels.com/photos/7363682/pexels-photo-7363682.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     }
   ]
+
+  const { allRestaurants } = useFilterContext();
+  const featuredRestaurants = allRestaurants.slice(0, 7);
 
   const cuisines = [
     {
@@ -159,7 +163,7 @@ const Home = () => {
       <main className="container mt-4">
         <div className="featured-iteams">
           <h4>{user ? user.firstName : "User"}, what's on your mind?</h4>
-          <FeaturedRoundedBoxes items={imgArr} />
+          <FeaturedRoundedBoxes searchBy={"Dishes"} items={imgArr} />
         </div>
 
         <hr />
@@ -167,21 +171,21 @@ const Home = () => {
         <div className="mt-4 recommend">
           <h4>Recommended Restaurants for You</h4>
           <p>Find the best restaurants that suit you</p>
-          <Slider img={imgArr} />
+          <Slider featuredRestaurants={featuredRestaurants} />
         </div>
         <hr />
 
         <div className="mt-4 featured-cuisines">
           <h4>Featured Cuisines</h4>
           <p>Explore some of our most popular cuisines selected just for you</p>
-          <FeaturedRoundedBoxes items={cuisines} />
+          <FeaturedRoundedBoxes searchBy={"Restaurants"} items={cuisines} />
         </div>
         <hr />
 
         <div className="mt-4 newly-added">
           <h4>Newly Added foods</h4>
           <p>Do not miss out on these recently added items selected just for you</p>
-          <Slider img={cuisines} />
+          <Slider featuredRestaurants={featuredRestaurants} />
         </div>
 
         <hr />
