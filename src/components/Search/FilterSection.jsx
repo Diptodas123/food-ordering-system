@@ -3,10 +3,10 @@ import "./FilterSection.css"
 import { useFilterContext } from '../../Context/FilterContext';
 import FormatPrice from '../../Helper/FormatPrice';
 const FilterSection = () => {
-  const { filter: { text, cuisine, maxPrice, minPrice, price, searchBy }, allRestaurants, updateFilterValue, clearFilter } = useFilterContext();
+  const { filter: { text, cuisine, foodType, maxPrice, minPrice, price, searchBy }, allRestaurants, updateFilterValue, clearFilter } = useFilterContext();
 
   const allCuisines = ['All', ...new Set(allRestaurants.map((item) => item.cuisine))];
-  const foodType = ['All', 'Veg', 'Non-Veg'];
+  const allFoodType = ['All', 'Veg', 'Non-Veg'];
 
   return (
     <section className="container filter-section-container">
@@ -36,7 +36,7 @@ const FilterSection = () => {
         <section>
           <h5>Type</h5>
           {
-            foodType.map((item, index) => {
+            allFoodType.map((item, index) => {
               if (item === 'All') {
                 return (
                   <div key={index} className='form-check'>
