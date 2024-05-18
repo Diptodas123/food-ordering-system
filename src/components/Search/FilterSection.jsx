@@ -62,7 +62,7 @@ const FilterSection = () => {
                     name='foodType'
                     id={item}
                     onChange={updateFilterValue}
-                    checked={foodType.includes(item)}
+                    checked={foodType === item}
                     value={item}
                   />
                   <label htmlFor={item}

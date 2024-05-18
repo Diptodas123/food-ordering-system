@@ -46,7 +46,7 @@ const Footer = () => {
                         <ul className="list-unstyled d-flex align-items-center justify-content-center flex-column">
                             <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link onClick={backToTop} style={{ color: "white" }} to={"/about"}><InfoIcon /> About</Link></li>
                             <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link onClick={backToTop} style={{ color: "white" }} to={"/contact"}><ContactEmergency /> Contact</Link></li>
-                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link onClick={backToTop} style={{ color: "white" }} to={"/restaurant-registration"}><Handshake /> Partner with us</Link></li>
+                            <li className="footer-link pt-2 d-flex align-items-center justify-content-center"><Link onClick={backToTop} style={{ color: "white" }} to={"/partner-with-us"}><Handshake /> Partner with us</Link></li>
                         </ul>
                     </div>
                     <div className="flex-column d-flex align-items-center justify-content-cente footer-column">

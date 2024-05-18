@@ -8,7 +8,7 @@ const FeaturedRoundedBoxes = ({ items, searchBy }) => {
         const events = [
             { name: "cuisine", value: curElem.name },
             { name: "searchBy", value: searchBy },
-            ...(searchBy === "Dishes" ? [{ name: "text", value: curElem.name }] : [])
+            ...(searchBy === "Dishes" ? [{ name: "text", value: curElem.name }] : [{ name: "text", value: "" }])
         ];
 
         events.forEach(({ name, value }) => {
