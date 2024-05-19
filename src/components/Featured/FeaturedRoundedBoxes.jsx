@@ -6,7 +6,7 @@ const FeaturedRoundedBoxes = ({ items, searchBy }) => {
     const navigate = useNavigate();
     const updateValue = (curElem) => {
         const events = [
-            { name: "cuisine", value: curElem.name },
+            searchBy === "Restaurants" ? { name: "cuisine", value: curElem.name } : { name: "cuisine", value: "All" },
             { name: "searchBy", value: searchBy },
             ...(searchBy === "Dishes" ? [{ name: "text", value: curElem.name }] : [{ name: "text", value: "" }])
         ];

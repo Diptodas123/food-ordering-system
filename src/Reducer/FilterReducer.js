@@ -33,6 +33,15 @@ const reducer = (state, action) => {
                 allRestaurants: restaurants,
                 filterRestaurants: restaurants,
             };
+        case "SET_ALL_DISHES":
+            let { foodItems } = action.payload;
+            return {
+                ...state,
+                isLoading: false,
+                allDishes: foodItems,
+                filterDishes: foodItems
+            }
+
         case "SET_GRID_VIEW":
             return {
                 ...state,
@@ -59,7 +68,7 @@ const reducer = (state, action) => {
             };
 
         case "FILTER_RESTAURANTS":
-            const { text, cuisine, maxPrice, minPrice, price, searchBy, foodType } = state.filter;
+            const { text, cuisine, maxPrice, minPrice, price, searchBy, category } = state.filter;
             let tempData;
             if (searchBy === "Restaurants") {
                 tempData = [...state.allRestaurants];
@@ -67,10 +76,11 @@ const reducer = (state, action) => {
                 tempData = [...state.allDishes];
             }
             if (text) {
-                tempData = tempData.filter((item) => item.name.toLowerCase().includes(text));
+                const searchText = text.toLowerCase();
+                tempData = tempData.filter((item) => item.name.toLowerCase().includes(searchText));
             }
-            if (foodType !== "All" && searchBy === "Dishes") {
-                tempData = tempData.filter((item) => item.foodType === foodType);
+            if (category !== "All" && searchBy === "Dishes") {
+                tempData = tempData.filter((item) => item.category === category);
             }
             if (cuisine !== "All") {
                 tempData = tempData.filter((item) => item.cuisine === cuisine);
@@ -86,7 +96,8 @@ const reducer = (state, action) => {
             }
             return {
                 ...state,
-                filterRestaurants: tempData
+                filterRestaurants: searchBy === "Restaurants" ? tempData : state.filterRestaurants,
+                filterDishes: searchBy === "Dishes" ? tempData : state.filterDishes
             }
 
         case "SORTING_RESTAURANTS":
@@ -119,12 +130,12 @@ const reducer = (state, action) => {
                 ...state,
                 filterRestaurants: state.allRestaurants,
                 filterDishes: state.allDishes,
-                searchBy: "Restaurants",
                 filter: {
                     ...state.filter,
+                    searchBy: "Restaurants",
                     text: "",
                     cuisine: "All",
-                    foodType: "All",
+                    category: "All",
                     maxPrice: 0,
                     minPrice: 0,
                     price: 0,

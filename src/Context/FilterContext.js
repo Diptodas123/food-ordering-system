@@ -15,7 +15,7 @@ const initialState = {
         text: "",
         searchBy: "Restaurants",
         cuisine: "All",
-        foodType: "All",
+        category: "All",
         maxPrice: 0,
         minPrice: 0,
         price: 0,
@@ -35,6 +35,17 @@ const FilterProvider = ({ children }) => {
             console.log(error);
         }
     };
+
+    const getAllDishes = async () => {
+        dispatch({ type: "SET_LOADING" });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/restaurant/getAllFoodItems`);
+            const data = await response.json();
+            dispatch({ type: "SET_ALL_DISHES", payload: data });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const setGridView = () => {
         dispatch({ type: "SET_GRID_VIEW" });
@@ -72,9 +83,10 @@ const FilterProvider = ({ children }) => {
 
     useEffect(() => {
         getallRestaurants();
+        getAllDishes();
     }, []);
 
-    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue, clearFilter }}>
+    return <FilterContext.Provider value={{ ...state, setGridView, setListView, sorting, updateFilterValue, clearFilter, getAllDishes }}>
         {children}
     </FilterContext.Provider>
 }

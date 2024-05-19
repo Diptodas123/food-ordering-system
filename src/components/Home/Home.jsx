@@ -76,8 +76,9 @@ const Home = () => {
     }
   ]
 
-  const { allRestaurants } = useFilterContext();
+  const { allRestaurants,allDishes } = useFilterContext();
   const featuredRestaurants = allRestaurants.slice(0, 7);
+  const featuredDishes = allDishes.slice(0, 7);
 
   const cuisines = [
     {
@@ -185,7 +186,7 @@ const Home = () => {
         <div className="mt-4 newly-added">
           <h4>Newly Added foods</h4>
           <p>Do not miss out on these recently added items selected just for you</p>
-          <Slider featuredRestaurants={featuredRestaurants} />
+          <Slider featuredDishes={featuredDishes} searchBy={"Dishes"} />
         </div>
 
         <hr />

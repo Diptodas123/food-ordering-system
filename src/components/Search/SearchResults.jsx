@@ -28,11 +28,11 @@ const SearchResults = () => {
 
   if (gridView) {
     return (
-      <GridView data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
+      <GridView searchBy={searchBy} data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
     )
   } else {
     return (
-      <ListView data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
+      <ListView searchBy={searchBy} data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
     )
   }
 }

@@ -164,7 +164,7 @@ const RestaurantExtras = () => {
                                     onChange={(e) => { handleOnchange(e) }}
                                     InputLabelProps={{ shrink: true }}
                                     sx={{
-                                        width: 700,
+                                        width: 600,
                                     }}
                                 />
                                 <TextField
@@ -178,7 +178,7 @@ const RestaurantExtras = () => {
                                     onChange={(e) => { handleOnchange(e) }}
                                     InputLabelProps={{ shrink: true }}
                                     sx={{
-                                        width: 700,
+                                        width: 600,
                                     }}
                                 />
                                 <TextField
@@ -192,7 +192,7 @@ const RestaurantExtras = () => {
                                     onChange={(e) => { handleOnchange(e) }}
                                     InputLabelProps={{ shrink: true }}
                                     sx={{
-                                        width: 700,
+                                        width: 600,
                                     }}
                                 />
                                 <TextField
@@ -209,7 +209,7 @@ const RestaurantExtras = () => {
                                         native: true,
                                     }}
                                     sx={{
-                                        width: 700,
+                                        width: 600,
                                     }}
                                 >
                                     <option
@@ -254,7 +254,7 @@ const RestaurantExtras = () => {
                                     variant="contained"
                                     startIcon={<CloudUploadIcon />}
                                     sx={{
-                                        width: 700,
+                                        width: 600,
                                         padding: '0.5rem 1rem',
                                     }}
                                     disabled={isUploading}
@@ -264,11 +264,16 @@ const RestaurantExtras = () => {
                                 </Button>
                                 <Button
                                     variant="contained"
+
                                     sx={{
-                                        width: 700,
+                                        width: 600,
                                         padding: '0.5rem 1rem',
+                                        backgroundColor: '#99f173',
+                                        ":disabled": {
+                                            backgroundColor: '#ace398',
+                                        }
                                     }}
-                                    color='success'
+
                                     type='submit'
                                     disabled={value.name === "" || value.description === "" || value.price === "" || value.category === "" || isUploading}
                                 >
@@ -279,7 +284,7 @@ const RestaurantExtras = () => {
 
                     </Box>
                 </ThemeProvider>
-            </ColorModeContext.Provider>
+            </ColorModeContext.Provider >
         </>
     )
 }
