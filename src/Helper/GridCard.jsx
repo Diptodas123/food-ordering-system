@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from '../Context/AppContext';
 import FormatPrice from './FormatPrice';
 import Star from '@mui/icons-material/Star';
+import { useUserContext } from '../Context/UserContext';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CartQuantityToggle from '../Helper/CartQuantityToggle';
 
 const GridCard = ({ data, index, searchBy }) => {
     const { mode } = useAppContext();
+    const { addToCart } = useUserContext();
 
     // Check if data is defined and has the necessary properties
     if (!data) {
@@ -21,7 +23,6 @@ const GridCard = ({ data, index, searchBy }) => {
         var keywords = data.keywords ? data.keywords : [];
     }
 
-    console.log(data);
     return (
         searchBy === "Restaurants" ?
             data._id ? (
@@ -78,14 +79,25 @@ const GridCard = ({ data, index, searchBy }) => {
                             <img src={data.image} alt={data.name} />
                         </div>
                         <div className='grid-card-item-details mt-2'>
-                            <img src={data.category === "Veg" ? "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/1024px-Veg_symbol.svg.png" : "https://packagingguruji.com/wp-content/uploads/2022/09/Old-Non-Veg-Logo.png"}
+                            <img
+                                src={data.category === "Veg" ?
+                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/1024px-Veg_symbol.svg.png"
+                                    : "https://packagingguruji.com/wp-content/uploads/2022/09/Old-Non-Veg-Logo.png"
+                                }
                                 height={25} width={25}
-                                alt="" />
+                                alt="category"
+                            />
                             <p style={{ marginBottom: 0 }}>{data.name}</p>
                         </div>
                         <div className='grid-card-item-footer'>
-                            <p style={{ paddingLeft: "0.6rem" }}><FormatPrice price={data.price} /></p>
-                            <button className='btn'>Add to Cart</button>
+                            <p style={{ paddingLeft: "0.6rem", fontSize: "1.3rem" }}>
+                                <FormatPrice price={data.price} />
+                            </p>
+                            <button className='btn' style={{ height: "2.5rem" }}
+                                onClick={() => addToCart(data)}
+                            >
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
