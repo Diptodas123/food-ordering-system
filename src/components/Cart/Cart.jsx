@@ -14,6 +14,8 @@ import { Box, Button, Typography } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkIcon from '@mui/icons-material/Work';
 import FmdGoodIcon from '@mui/icons-material/FmdGood'
+import { loadStripe } from "@stripe/stripe-js";
+
 const Cart = () => {
   const { user,
     cartItems,
@@ -60,6 +62,29 @@ const Cart = () => {
     setDeliveryAddress(value.address);
   }
 
+  const placeOrder = async (e) => {
+    e.preventDefault();
+    const totalAmout = totalCartItemPrice + deliveryCharge;
+    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/generatePayment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ cartItems, deliveryCharge })
+    });
+
+    const session = await response.json();
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id
+    });
+
+    if (result.error) {
+      toastMessage({ msg: result.error.message, type: "error" });
+    }
+  }
+
   return (
     <div>
       <Navbar />
@@ -74,16 +99,18 @@ const Cart = () => {
               <section className='cart-items-table-container'>
                 <table>
                   <thead>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Remove</th>
+                    <tr>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Subtotal</th>
+                      <th>Remove</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {
-                      cartItems.map((item) => (
-                        <tr key={item.id}>
+                      cartItems.map((item, index) => (
+                        <tr key={index}>
                           <td className='d-flex align-items-center'>
                             <img src={item.image} alt={item.name} />
                             <div>
@@ -248,7 +275,7 @@ const Cart = () => {
                 </section>
 
               </div>
-              <div className='cart-footer'>
+              <form className='cart-footer' method='post' onSubmit={placeOrder}>
                 <div className='d-flex align-items-center' style={{ width: "100%", justifyContent: "flex-start", gap: "1rem" }}>
                   <Typography variant="h6">Delivery Address:</Typography>
                   <input type="text"
@@ -259,10 +286,13 @@ const Cart = () => {
                 </div>
                 <button className='btn'
                   style={{ width: "200px", fontSize: "20px" }}
+                  type='submit'
+                  disabled={!deliveryAddress}
+                  title={!deliveryAddress ? "Please choose delivery address" : null}
                 >
                   Place Order
                 </button>
-              </div>
+              </form>
             </>
             :
             <div style={{ textAlign: 'center' }}>

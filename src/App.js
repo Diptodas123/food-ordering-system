@@ -26,6 +26,8 @@ import Contact from './components/Contact/Contact';
 import RestaurantDashboard from './components/Restaurant/RestaurantDashboard';
 import RestaurantExtras from './components/Restaurant/Options/RestaurantExtras';
 import RestaurantLogin from './components/Restaurant/RestaurantLogin';
+import Success from './components/Payment/Success';
+import Cancel from './components/Payment/Cancel';
 
 function App() {
 
@@ -45,14 +47,15 @@ function App() {
         <Route path='/signup' element=<Signup />></Route>
         <Route path='/profile' element=<Profile />></Route>
         <Route path='/contact' element=<Contact />></Route>
-        
+        <Route path='/success' element=<Success />></Route>
+        <Route path='/cancel' element=<Cancel />></Route>
 
         <Route path='/restaurant-login' element={<RestaurantLogin />} />
         <Route path='/partner-with-us' element={<RestaurantRegistration />} />
         <Route path='/restaurant-dashboard' element={<RestaurantDashboard />} />
         <Route path='/RestaurantAddMenu' element={<RestaurantExtras />} />
         <Route path='/restaurant/:restaurantId' element={<RestaurantPage />}></Route>
-
+      
         <Route path='/Adminlogin' element={<AdminLogin />} />
         <Route path='/AdminDashboard' element={<AdminDashboard />} />
         <Route path='/AdminUsers' element={<AdminUsers />} />
