@@ -108,10 +108,56 @@
     }
 }
 
-.dark-mode .profile-option-list{
+.dark-mode .profile-option-list {
     border-bottom: 2px solid #ffffff;
 }
 
-.dark-mode .view-icon-profile-favourite-section{
+.dark-mode .view-icon-profile-favourite-section {
     color: white;
+}
+
+.profile-orders-list-main {
+    margin-left: 30px;
+}
+
+.profile-option-orders {
+    height: 170px;
+    width: 1000px;
+    margin-top: 5px;
+    background-color: #e8e8e8;
+    border-radius: 10px;
+
+    img {
+        border-radius: 10px 0 0 10px;
+    }
+}
+
+.dark-mode .profile-option-orders {
+    background-color: #818181;
+}
+
+.profile-address-card {
+    background-color: #ffffff;
+}
+
+.dark-mode .profile-address-card {
+    background-color: #818181;
+}
+
+
+.profile-address-icon {
+    color: #cdcccc;
+}
+
+.dark-mode .profile-address-icon {
+    color: white;
+}
+
+.dark-mode .profile-modal>* {
+    background-color: #797777;
+
+}
+
+.dark-mode .address-modal>* {
+    background-color: #797777;
 }

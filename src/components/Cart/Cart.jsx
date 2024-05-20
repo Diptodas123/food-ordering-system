@@ -7,9 +7,59 @@ import "./Cart.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { mockAddress } from '../../data/MockData';
 import FormatPrice from '../../Helper/FormatPrice';
+import { useAppContext } from '../../Context/AppContext';
+import toastMessage from '../ToastMessage';
+import { useState } from 'react';
+import { Box, Button, Typography } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import WorkIcon from '@mui/icons-material/Work';
+import FmdGoodIcon from '@mui/icons-material/FmdGood'
 const Cart = () => {
-  const { user, cartItems, incrementQuantity, decrementQuantity, removeItem, clearCartItems } = useUserContext();
+  const { user,
+    cartItems,
+    incrementQuantity,
+    decrementQuantity,
+    removeItem, clearCartItems,
+    totalCartItemPrice,
+    deliveryCharge
+  } = useUserContext();
+
+  const [address, setAddress] = useState(mockAddress);
+  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [validCoupon, setValidCoupon] = useState(false);
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+
   const navigate = useNavigate();
+  const { mode } = useAppContext();
+
+  const handleCouponSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/verifyCoupon/${user._id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ coupon: coupon.toUpperCase() })
+    });
+
+    const data = await response.json();
+    if (!data.success) {
+      setCoupon("");
+      return toastMessage({ msg: data.message, type: "error" });
+    }
+
+    toastMessage({ msg: data.message, type: "success" });
+    setDiscount(data.discount);
+    setValidCoupon(true);
+    setCoupon("");
+  }
+
+  const setAddressHandler = (value) => {
+    console.log(value);
+    setDeliveryAddress(value.address);
+  }
+
   return (
     <div>
       <Navbar />
@@ -62,11 +112,156 @@ const Cart = () => {
               </section>
               <div className='divider'>
                 <section className='cart-address-container'>
+                  <Box>
+                    <Typography variant="h6"
+                      sx={{
+                        fontWeight: 600,
+                        pl: 8,
+                      }}
+                    >Select your Address</Typography>
+                  </Box>
 
+                  <Box className="cart-address-container-wrapper">
+                    {
+                      address.map((value) => {
+                        const { id, type, address } = value
+                        return (
+                          <Box className="profile-address-card"
+                            key={id}
+                            sx={{
+                              display: "flex",
+                              width: "20vw",
+                              height: "23vh",
+                              border: "1px solid black",
+                              borderRadius: "10px",
+                            }}
+                          >
+                            <Box className="profile-address-icon"
+                              sx={{
+                                width: '15%',
+                                // backgroundColor: "red",
+                                pt: 1.5,
+                                height: "100%"
+                              }}
+                            >
+                              {type === "Home" ? <HomeIcon /> : type === "Work" ? <WorkIcon /> : <FmdGoodIcon />}
+                            </Box>
+                            <Box className="profile-address-detail"
+                              sx={{
+                                width: '85%',
+                                // backgroundColor: "blue",
+                                height: "100%",
+                                pt: 1.5,
+
+                              }}
+                            >
+                              <Box className="profile-address-detail-title"
+                                sx={{
+                                  textAlign: "left",
+                                  fontWeight: 800,
+                                }}
+                              >
+                                {type}
+                              </Box>
+                              <Box className="profile-address-detail-address"
+                                sx={{
+                                  height: "45%",
+                                  width: "100%",
+                                  overflow: 'hidden',
+                                  textOverflow: "ellipsis",
+                                  textAlign: "left",
+                                  fontSize: "0.9rem",
+                                  whiteSpace: "wrap",
+                                  mb: "0.7rem",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                {address}
+                              </Box>
+                              <Box className="profile-address-detail-buttons"
+                                sx={{
+                                  display: "flex",
+                                  gap: "1rem",
+                                  justifyContent: "flex-end",
+                                  p: "0 10px",
+                                }}
+                              >
+                                <Button
+                                  variant="outlined"
+                                  color='success'
+                                  onClick={() => setAddressHandler(value)}
+                                >
+                                  Use
+                                </Button>
+                              </Box>
+                            </Box>
+                          </Box>
+                        )
+                      })
+                    }
+                  </Box>
                 </section>
                 <section className='cart-bill-container'>
+                  <form method='post' onSubmit={handleCouponSubmit}>
+                    <input className='input'
+                      type="text"
+                      placeholder='Apply Coupon'
+                      value={coupon}
+                      onChange={(e) => setCoupon(e.target.value)}
+                    />
+                    <input
+                      className='btn'
+                      type="submit"
+                      disabled={!coupon}
+                      value="Apply"
+                    />
+                  </form>
 
+                  <div className='cart-bill'>
+                    <h6>Bill Details</h6>
+                    <div className='cart-bill-row'>
+                      <p>Subtotal</p>
+                      <p className='price'>{<FormatPrice price={totalCartItemPrice} />}</p>
+                    </div>
+                    <div className='cart-bill-row'>
+                      <p>Delivery Charge</p>
+                      <p className='price'>{<FormatPrice price={deliveryCharge} />}</p>
+                    </div>
+                    <div style={mode === "light-mode" ? { borderTop: "2px solid black" } : { borderTop: "2px solid white" }}></div>
+                    {
+                      validCoupon ?
+                        <div>
+                          <div className='cart-bill-row'>
+                            <p>Discount</p>
+                            <p className='price'>- {<FormatPrice price={discount / 100 * 100} />}</p>
+                          </div>
+                          <div style={mode === "light-mode" ? { borderTop: "2px solid black" } : { borderTop: "2px solid white" }}></div>
+                        </div>
+                        : null
+                    }
+                    <div className='cart-bill-row mt-1'>
+                      <h6>Grand Total</h6>
+                      <p className='price'>{<FormatPrice price={validCoupon ? totalCartItemPrice - discount + deliveryCharge : (totalCartItemPrice + deliveryCharge)} />}</p>
+                    </div>
+                  </div>
                 </section>
+
+              </div>
+              <div className='cart-footer'>
+                <div className='d-flex align-items-center' style={{ width: "100%", justifyContent: "flex-start", gap: "1rem" }}>
+                  <Typography variant="h6">Delivery Address:</Typography>
+                  <input type="text"
+                    value={deliveryAddress}
+                    placeholder='Choose Delivery Address'
+                    readOnly
+                  />
+                </div>
+                <button className='btn'
+                  style={{ width: "200px", fontSize: "20px" }}
+                >
+                  Place Order
+                </button>
               </div>
             </>
             :
