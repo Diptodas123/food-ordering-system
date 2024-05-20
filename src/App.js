@@ -25,6 +25,7 @@ import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import RestaurantDashboard from './components/Restaurant/RestaurantDashboard';
 import RestaurantExtras from './components/Restaurant/Options/RestaurantExtras';
+import RestaurantLogin from './components/Restaurant/RestaurantLogin';
 
 function App() {
 
@@ -45,6 +46,8 @@ function App() {
         <Route path='/profile' element=<Profile />></Route>
         <Route path='/contact' element=<Contact />></Route>
         
+
+        <Route path='/restaurant-login' element={<RestaurantLogin />} />
         <Route path='/partner-with-us' element={<RestaurantRegistration />} />
         <Route path='/restaurant-dashboard' element={<RestaurantDashboard />} />
         <Route path='/RestaurantAddMenu' element={<RestaurantExtras />} />

@@ -14,6 +14,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Avatar from '@mui/material/Avatar';
 import ProfileMain from "./Options/ProfileMain";
 import Orders from "./Options/Orders";
+import Address from "./Options/Address.jsx";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ViewListIcon from '@mui/icons-material/ViewList';
@@ -69,8 +70,8 @@ const Profile = () => {
     const colors = tokens(theme.palette.mode);
     const [selectedItem, setSelectedItem] = useState(sessionStorage.getItem("selectedItem") || "Profile");
     const [view, setView] = useState(sessionStorage.getItem("view") || "module");
-    const {user}=useUserContext();
-    
+    const { user } = useUserContext();
+
     const handleViewChange = (event, newView) => {
         if (newView !== null) {
             setView(newView);
@@ -197,8 +198,9 @@ const Profile = () => {
                                 marginTop: "20px",
                             }}
                         >
-                            Your Addresses
+                            Manage Addresses
                         </Typography>
+                        <Address />
                     </>
                 );
             default:
@@ -314,8 +316,10 @@ const Profile = () => {
 
             {/* FOOTER */}
             <Footer />
+
+            {/* MODAL */}
             <div
-                className="modal fade "
+                className="modal fade address-modal"
                 id="exampleModal"
                 tabIndex="-1"
                 aria-labelledby="exampleModalLabel"
