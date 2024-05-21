@@ -54,7 +54,6 @@ const Cart = () => {
     toastMessage({ msg: data.message, type: "success" });
     setDiscount(data.discount);
     setValidCoupon(true);
-    setCoupon("");
   }
 
   const setAddressHandler = (value) => {
@@ -64,14 +63,22 @@ const Cart = () => {
 
   const placeOrder = async (e) => {
     e.preventDefault();
-    const totalAmout = totalCartItemPrice + deliveryCharge;
+    const totalAmount = validCoupon ? totalCartItemPrice + deliveryCharge - discount : totalCartItemPrice + deliveryCharge;
     const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/generatePayment`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/placeOrder`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ cartItems, deliveryCharge })
+      body: JSON.stringify({
+        user,
+        restaurant: cartItems[0].restaurant,
+        address: deliveryAddress,
+        totalAmount,
+        cartItems,
+        deliveryCharge,
+        discount
+      })
     });
 
     const session = await response.json();
@@ -234,13 +241,14 @@ const Cart = () => {
                     <input className='input'
                       type="text"
                       placeholder='Apply Coupon'
+                      readOnly={validCoupon}
                       value={coupon}
                       onChange={(e) => setCoupon(e.target.value)}
                     />
                     <input
                       className='btn'
                       type="submit"
-                      disabled={!coupon}
+                      disabled={!coupon || validCoupon}
                       value="Apply"
                     />
                   </form>
@@ -269,7 +277,7 @@ const Cart = () => {
                     }
                     <div className='cart-bill-row mt-1'>
                       <h6>Grand Total</h6>
-                      <p className='price'>{<FormatPrice price={validCoupon ? totalCartItemPrice - discount + deliveryCharge : (totalCartItemPrice + deliveryCharge)} />}</p>
+                      <p className='price'>{<FormatPrice price={validCoupon ? totalCartItemPrice - discount + deliveryCharge : totalCartItemPrice + deliveryCharge} />}</p>
                     </div>
                   </div>
                 </section>
