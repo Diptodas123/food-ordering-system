@@ -1,0 +1,8 @@
+.list-item-card-container {
+    border: 1px solid green;
+    padding: 1rem;
+    min-height: 200px;
+    width: 90%;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+}

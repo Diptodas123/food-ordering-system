@@ -57,7 +57,7 @@ const ListView = ({ data = [] }) => {
                                             </div>
                                             <div className="list-card-price">
                                                 <p style={{ marginBottom: 0 }}>
-                                                    <FormatPrice price={0} /> <span>for two</span>
+                                                    <FormatPrice price={1000} /> <span>for two</span>
                                                 </p>
                                             </div>
                                         </div>

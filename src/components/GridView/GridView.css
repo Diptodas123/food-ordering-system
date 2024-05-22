@@ -1,7 +1,7 @@
 .grid-view {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 18px;
+    grid-gap: 16px;
     margin-top: 60px;
     margin-bottom: 60px;
 }
@@ -10,7 +10,7 @@
     border: none;
     height: 270px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    width: 270px;
+    width: 280px;
     padding: 0.5rem;
 }
 
