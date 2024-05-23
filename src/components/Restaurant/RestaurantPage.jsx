@@ -7,7 +7,6 @@ import toastMessage from "../ToastMessage";
 import KeywordBox from "../KeywordBox";
 import RenderRatings from "../../Helper/RenderRatings";
 import RestaurantPageExploreComponent from "./RestaurantPageExploreComponent";
-import RestaurantPageDetailsComponent from "./RestaurantPageDetailsComponent";
 import RestaurantPageReviewsComponent from "./RestaurantPageReviewsComponent";
 import RestaurantPagePhotosComponent from "./RestaurantPagePhotosComponent";
 import RestaurantPageMenuComponent from "./RestaurantPageMenuComponent";
@@ -59,8 +58,6 @@ const RestaurantPage = () => {
 
     const renderComponent = () => {
         switch (component) {
-            case "Details":
-                return <RestaurantPageDetailsComponent name={restaurant.name} />
             case "Explore":
                 return <RestaurantPageExploreComponent name={restaurant.name} />
             case "Reviews":
@@ -70,7 +67,7 @@ const RestaurantPage = () => {
             case "Menu":
                 return <RestaurantPageMenuComponent name={restaurant.name} img={restaurant.menuUrl} />
             default:
-                return <RestaurantPageDetailsComponent />
+                return <RestaurantPageExploreComponent />
         }
     }
 
@@ -119,8 +116,7 @@ const RestaurantPage = () => {
 
                             <div className="restaurant-page-main">
                                 <div className="restaurant-page-main-options">
-                                    <button className="pl-3" onClick={(e) => setComponent(e.target.innerText)}>Details</button>
-                                    <button onClick={(e) => setComponent(e.target.innerText)}>Explore</button>
+                                    <button className="pl-3" onClick={(e) => setComponent(e.target.innerText)}>Explore</button>
                                     <button onClick={(e) => setComponent(e.target.innerText)}>Reviews</button>
                                     <button onClick={(e) => setComponent(e.target.innerText)}>Photos</button>
                                     <button onClick={(e) => setComponent(e.target.innerText)}>Menu</button>

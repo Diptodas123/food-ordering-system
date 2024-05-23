@@ -5,7 +5,6 @@ import FormatPrice from './FormatPrice';
 import Star from '@mui/icons-material/Star';
 import { useUserContext } from '../Context/UserContext';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import CartQuantityToggle from '../Helper/CartQuantityToggle';
 
 const GridCard = ({ data, index, searchBy }) => {
     const { mode } = useAppContext();

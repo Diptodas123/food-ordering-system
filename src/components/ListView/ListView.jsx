@@ -6,6 +6,7 @@ import KeywordBox from "../KeywordBox";
 import FormatPrice from "../../Helper/FormatPrice";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../Context/AppContext";
+import ListCardItem from "./ListCardItem";
 const ListView = ({ data = [] }) => {
     const { filter: { searchBy }, isLoading } = useFilterContext();
     const { mode } = useAppContext();
@@ -64,7 +65,11 @@ const ListView = ({ data = [] }) => {
                                     </div>
                                 </Link>
                             )
-                        }) : null
+                        }) : data.map((curElem, index) => {
+                            return (
+                                <ListCardItem index={index} foodItem={curElem} />
+                            )
+                        })
                 }
             </div>
         );
