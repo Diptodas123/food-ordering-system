@@ -10,7 +10,6 @@ import { FilterProvider } from './Context/FilterContext.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
       <AppProvider>
         <UserProvider>
           <FilterProvider>
@@ -18,6 +17,5 @@ root.render(
           </FilterProvider>
         </UserProvider>
       </AppProvider>
-    </React.StrictMode>
   </BrowserRouter>
 );

@@ -81,10 +81,9 @@ const RestaurantPage = () => {
             <Navbar />
             {
                 loading ?
-                    <img
-                        style={{ width: "100%", height: "100%",marginTop: "80px" }}
-                        src="https://cdn.dribbble.com/users/348647/screenshots/1273497/hgwm_loading.gif"
-                        alt="loading..." />
+                    <div className="restaurant-page-loader">
+
+                    </div>
                     :
                     <div className="restaurant-page container">
                         <section className="restaurant-page-image-container">

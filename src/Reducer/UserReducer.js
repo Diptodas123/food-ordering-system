@@ -113,7 +113,7 @@ const reducer = (state, action) => {
 
         case "REMOVE_CART_ITEM":
             const filteredCart = state.cartItems.filter(item => item._id !== action.payload);
-            
+
             return {
                 ...state,
                 cartItems: filteredCart

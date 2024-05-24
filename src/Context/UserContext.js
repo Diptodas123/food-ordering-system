@@ -13,9 +13,8 @@ const initialState = {
     cartItems: getCartItemsFromLocalStorage(),
     totalCartItems: 0,
     totalCartItemPrice: 0,
-    deliveryCharge: 50
+    deliveryCharge: 50,
 }
-
 
 const UserProvider = ({ children }) => {
 
@@ -49,6 +48,14 @@ const UserProvider = ({ children }) => {
         dispatch({ type: "CLEAR_CART_ITEMS" })
     }
 
+    const updateAddress = (address) => {
+        dispatch({ type: "UPDATE_ADDRESS", payload: address })
+    }
+
+    const applyDiscount = (discount) => {
+        dispatch({ type: "APPLY_DISCOUNT", payload: discount })
+    }
+
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         dispatch({ type: "CART_TOTAL_ITEM_PRICE" });
@@ -63,7 +70,7 @@ const UserProvider = ({ children }) => {
     }, [state.user])
 
     return (
-        <UserContext.Provider value={{ ...state, setUser, clearUser, addToCart, incrementQuantity, decrementQuantity, clearCartItems, removeItem }}>
+        <UserContext.Provider value={{ ...state, setUser, clearUser, addToCart, incrementQuantity, decrementQuantity, clearCartItems, removeItem, updateAddress, applyDiscount }}>
             {children}
         </UserContext.Provider>
     )

@@ -28,8 +28,8 @@ const Cart = () => {
 
   const [address, setAddress] = useState(mockAddress);
   const [coupon, setCoupon] = useState("");
-  const [discount, setDiscount] = useState(0);
   const [validCoupon, setValidCoupon] = useState(false);
+  const [discount, setDiscount] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
   const navigate = useNavigate();
@@ -53,38 +53,37 @@ const Cart = () => {
 
     toastMessage({ msg: data.message, type: "success" });
     setDiscount(data.discount);
+    localStorage.setItem("discount", data.discount);
     setValidCoupon(true);
   }
 
   const setAddressHandler = (value) => {
-    console.log(value);
     setDeliveryAddress(value.address);
+    localStorage.setItem("address", JSON.stringify(value.address));
   }
 
   const placeOrder = async (e) => {
     e.preventDefault();
     const totalAmount = validCoupon ? totalCartItemPrice + deliveryCharge - discount : totalCartItemPrice + deliveryCharge;
     const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/placeOrder`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/generatePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        user,
-        restaurant: cartItems[0].restaurant,
-        address: deliveryAddress,
-        totalAmount,
         cartItems,
         deliveryCharge,
-        discount
+        discount,
+        totalAmount
       })
     });
 
     const session = await response.json();
 
+    localStorage.setItem("totalCartItemPrice", JSON.stringify(totalAmount));
     const result = await stripe.redirectToCheckout({
-      sessionId: session.id
+      sessionId: session.sessionUrl
     });
 
     if (result.error) {
