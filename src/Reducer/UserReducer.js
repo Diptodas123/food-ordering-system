@@ -125,6 +125,11 @@ const reducer = (state, action) => {
                 cartItems: []
             }
 
+        case "SET_ORDER_HISTORY":
+            return {
+                ...state,
+                orderHistory: action.payload
+            }
         default:
             return state
     }

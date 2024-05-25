@@ -16,7 +16,6 @@ const Success = () => {
 
     const placeOrder = async () => {
       try {
-        console.log(discount, totalCartItemPrice);
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/placeOrder`, {
           method: "POST",
           headers: {

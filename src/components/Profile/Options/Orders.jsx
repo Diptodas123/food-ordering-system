@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { tokens, useMode } from '../../Admin/theme'
 import { Box, Typography, Button, IconButton } from "@mui/material";
 import { mockOrders } from '../../../data/MockData';
@@ -6,12 +6,20 @@ import "../Profile.css"
 import Divider from '@mui/material/Divider';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useUserContext } from '../../../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const Orders = () => {
     const [theme, colorMode] = useMode();
     const colors = tokens(theme.palette.mode);
-    const [orders, setOrders] = useState(mockOrders);
+    const { orderHistory, fetchAllOrderHistory } = useUserContext();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchAllOrderHistory();
+    }, []);
+
     return (
         <>
             <Box
@@ -28,16 +36,18 @@ const Orders = () => {
                     }}
                 >
                     {
-                        orders.map((value) => {
-                            const { id, img, variety, restaurantName, foodItems, location, orderTime, city, state, pincode, deliverTime, delivered, price } = value
+                        orderHistory.map((value, index) => {
+                            const { _id, status, foodItems, totalAmount, createdAt } = value;
+                            const { name, address, imgUrls } = value.restaurant;
+
                             return (
-                                <Box key={id} className='profile-orders-list-main'
+                                <Box key={index} className='profile-orders-list-main'
                                     sx={{
                                         mt: 2,
                                     }}
                                 >
                                     <Box className='profile-option-orders'
-                                        key={id}
+                                        key={_id}
                                         sx={{
                                             display: "flex",
                                         }}
@@ -48,7 +58,7 @@ const Orders = () => {
                                             }}
                                         >
                                             <img
-                                                src={img}
+                                                src={imgUrls[0]}
                                                 height={169}
                                                 width="100%"
                                                 alt="Some Food was here"
@@ -75,7 +85,7 @@ const Orders = () => {
                                                             mt: 0.5,
                                                         }}
                                                     >
-                                                        {restaurantName}
+                                                        {name}
                                                     </Typography>
                                                 </Box>
                                                 <Box
@@ -84,13 +94,12 @@ const Orders = () => {
                                                         mr: 1,
                                                     }}
                                                 >
-                                                    Delivered&nbsp;on:&nbsp;{deliverTime}&nbsp;{delivered
-                                                        ?
-                                                        <CheckCircleIcon color="success"
-                                                        />
-                                                        :
-                                                        <CancelIcon color="warning"
-                                                        />
+                                                    {
+                                                        status !== "Completed" ? "Not delivered yet" :
+                                                            <>
+                                                                Delivered&nbsp;on:&nbsp;{new Date(createdAt).toLocaleTimeString()}&nbsp;
+                                                                <CheckCircleIcon color="success" />
+                                                            </>
                                                     }
                                                 </Box>
                                             </Box>
@@ -106,7 +115,7 @@ const Orders = () => {
                                                         whiteSpace: "nowrap",
                                                     }}
                                                 >
-                                                    {location}
+                                                    {address}
                                                 </Typography>
                                             </Box>
                                             <Box
@@ -118,7 +127,7 @@ const Orders = () => {
                                                     fontSize: 13.5,
                                                 }}
                                             >
-                                                ORDER&nbsp;#{id}&nbsp;|&nbsp;{orderTime}
+                                                ORDER&nbsp;#{_id}&nbsp;|&nbsp;{new Date(createdAt).toDateString()}
                                             </Box>
                                             <Divider
                                                 sx={{
@@ -137,14 +146,16 @@ const Orders = () => {
                                                         fontSize: 13.5,
                                                     }}
                                                 >
-                                                    {foodItems.join(" + ")}
+                                                    {foodItems.map((value) => {
+                                                        return value.name + " x " + value.quantity + " | "
+                                                    })}
                                                 </Box>
                                                 <Box
                                                     sx={{
                                                         mr: 1.5,
                                                     }}
                                                 >
-                                                    Total&nbsp;Paid&nbsp;₹&nbsp;{price}
+                                                    Total&nbsp;Paid&nbsp;₹&nbsp;{totalAmount}
                                                 </Box>
                                             </Box>
                                             <Box>
@@ -154,9 +165,21 @@ const Orders = () => {
                                                     sx={{
                                                         backgroundColor: "transparent",
                                                     }}
+                                                    onClick={() => { navigate(`/restaurant/${value.restaurant._id}`) }}
                                                 >REORDER
-
                                                 </Button>
+                                                {
+                                                    status !== "Completed" &&
+                                                    <Button variant="contained"
+                                                        color='success'
+                                                        sx={{
+                                                            ml: 1.5,
+                                                            backgroundColor: colors.greenAccent[500],
+                                                        }}
+                                                    >
+                                                        Track Order
+                                                    </Button>
+                                                }
                                             </Box>
                                         </Box>
                                     </Box>
@@ -167,7 +190,7 @@ const Orders = () => {
 
                     }
                 </Box>
-            </Box >
+            </Box>
         </>
     )
 }
