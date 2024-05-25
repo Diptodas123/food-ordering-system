@@ -12,6 +12,7 @@ const initialState = {
     user: JSON.parse(localStorage.getItem("userData")) || null,
     cartItems: getCartItemsFromLocalStorage(),
     orderHistory: [],
+    userAddress: [],
     totalCartItems: 0,
     totalCartItemPrice: 0,
     deliveryCharge: 50,
@@ -75,6 +76,23 @@ const UserProvider = ({ children }) => {
         }
     }
 
+    const fetchAllAddress = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllAddress`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": localStorage.getItem("token"),
+                    },
+                }
+            );
+            const data = await response.json();
+            dispatch({ type: "SET_USER_ADDRESS", payload: data.address });
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         dispatch({ type: "CART_TOTAL_ITEM_PRICE" });
@@ -88,8 +106,13 @@ const UserProvider = ({ children }) => {
         localStorage.setItem("userData", JSON.stringify(state.user));
     }, [state.user])
 
+    useEffect(() => {
+        fetchAllOrderHistory();
+        fetchAllAddress();
+    }, [state.orderHistory, state.userAddress]);
+
     return (
-        <UserContext.Provider value={{ ...state, setUser, clearUser, addToCart, incrementQuantity, decrementQuantity, clearCartItems, removeItem, updateAddress, applyDiscount, fetchAllOrderHistory }}>
+        <UserContext.Provider value={{ ...state, setUser, clearUser, addToCart, incrementQuantity, decrementQuantity, clearCartItems, removeItem, updateAddress, applyDiscount }}>
             {children}
         </UserContext.Provider>
     )

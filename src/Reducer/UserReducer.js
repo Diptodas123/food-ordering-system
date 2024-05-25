@@ -130,6 +130,12 @@ const reducer = (state, action) => {
                 ...state,
                 orderHistory: action.payload
             }
+        case "SET_USER_ADDRESS":
+            return {
+                ...state,
+                userAddress: action.payload
+            }
+
         default:
             return state
     }

@@ -8,7 +8,6 @@ import Avatar from '@mui/material/Avatar';
 import { useUserContext } from "../../../Context/UserContext.js";
 import app from '../../../firebase.js';
 import toastMessage from '../../ToastMessage.jsx';
-import { useNavigate } from 'react-router-dom';
 
 const ProfileMain = () => {
     const [theme, colorMode] = useMode();

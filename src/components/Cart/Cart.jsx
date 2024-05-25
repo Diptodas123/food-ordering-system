@@ -23,10 +23,11 @@ const Cart = () => {
     decrementQuantity,
     removeItem, clearCartItems,
     totalCartItemPrice,
-    deliveryCharge
+    deliveryCharge,
+    userAddress,
   } = useUserContext();
 
-  const [address, setAddress] = useState(mockAddress);
+  const [address, setAddress] = useState(userAddress);
   const [coupon, setCoupon] = useState("");
   const [validCoupon, setValidCoupon] = useState(false);
   const [discount, setDiscount] = useState(0);
@@ -156,82 +157,87 @@ const Cart = () => {
 
                   <Box className="cart-address-container-wrapper">
                     {
-                      address.map((value) => {
-                        const { id, type, address } = value
-                        return (
-                          <Box className="profile-address-card"
-                            key={id}
-                            sx={{
-                              display: "flex",
-                              width: "20vw",
-                              height: "23vh",
-                              border: "1px solid black",
-                              borderRadius: "10px",
-                            }}
-                          >
-                            <Box className="profile-address-icon"
+                      address.length === 0 ? <button className="btn"
+                        onClick={() => navigate("/profile")}
+                      >
+                        Add Address
+                      </button> :
+                        address.map((value, index) => {
+                          const { type, address } = value
+                          return (
+                            <Box className="profile-address-card"
+                              key={index}
                               sx={{
-                                width: '15%',
-                                // backgroundColor: "red",
-                                pt: 1.5,
-                                height: "100%"
+                                display: "flex",
+                                width: "20vw",
+                                height: "23vh",
+                                border: "1px solid black",
+                                borderRadius: "10px",
                               }}
                             >
-                              {type === "Home" ? <HomeIcon /> : type === "Work" ? <WorkIcon /> : <FmdGoodIcon />}
-                            </Box>
-                            <Box className="profile-address-detail"
-                              sx={{
-                                width: '85%',
-                                // backgroundColor: "blue",
-                                height: "100%",
-                                pt: 1.5,
+                              <Box className="profile-address-icon"
+                                sx={{
+                                  width: '15%',
+                                  // backgroundColor: "red",
+                                  pt: 1.5,
+                                  height: "100%"
+                                }}
+                              >
+                                {type === "Home" ? <HomeIcon /> : type === "Work" ? <WorkIcon /> : <FmdGoodIcon />}
+                              </Box>
+                              <Box className="profile-address-detail"
+                                sx={{
+                                  width: '85%',
+                                  // backgroundColor: "blue",
+                                  height: "100%",
+                                  pt: 1.5,
 
-                              }}
-                            >
-                              <Box className="profile-address-detail-title"
-                                sx={{
-                                  textAlign: "left",
-                                  fontWeight: 800,
                                 }}
                               >
-                                {type}
-                              </Box>
-                              <Box className="profile-address-detail-address"
-                                sx={{
-                                  height: "45%",
-                                  width: "100%",
-                                  overflow: 'hidden',
-                                  textOverflow: "ellipsis",
-                                  textAlign: "left",
-                                  fontSize: "0.9rem",
-                                  whiteSpace: "wrap",
-                                  mb: "0.7rem",
-                                  display: "flex",
-                                  alignItems: "center",
-                                }}
-                              >
-                                {address}
-                              </Box>
-                              <Box className="profile-address-detail-buttons"
-                                sx={{
-                                  display: "flex",
-                                  gap: "1rem",
-                                  justifyContent: "flex-end",
-                                  p: "0 10px",
-                                }}
-                              >
-                                <Button
-                                  variant="outlined"
-                                  color='success'
-                                  onClick={() => setAddressHandler(value)}
+                                <Box className="profile-address-detail-title"
+                                  sx={{
+                                    textAlign: "left",
+                                    fontWeight: 800,
+                                  }}
                                 >
-                                  Use
-                                </Button>
+                                  {type}
+                                </Box>
+                                <Box className="profile-address-detail-address"
+                                  sx={{
+                                    height: "45%",
+                                    width: "100%",
+                                    overflow: 'hidden',
+                                    textOverflow: "ellipsis",
+                                    textAlign: "left",
+                                    fontSize: "0.9rem",
+                                    whiteSpace: "wrap",
+                                    mb: "0.7rem",
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  {address}
+                                </Box>
+                                <Box className="profile-address-detail-buttons"
+                                  sx={{
+                                    display: "flex",
+                                    gap: "1rem",
+                                    justifyContent: "flex-end",
+                                    p: "0 10px",
+                                  }}
+                                >
+                                  <Button
+                                    variant="outlined"
+                                    color='success'
+                                    onClick={() => setAddressHandler(value)}
+                                  >
+                                    Use
+                                  </Button>
+                                </Box>
                               </Box>
                             </Box>
-                          </Box>
-                        )
-                      })
+                          )
+                        })
                     }
                   </Box>
                 </section>
