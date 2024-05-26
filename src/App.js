@@ -15,7 +15,6 @@ import AdminCoupon from './components/Admin/Main/AdminCoupons';
 import AdminMenu from './components/Admin/Main/AdminMenu';
 import AdminExtras from './components/Admin/Main/AdminExtra';
 import AdminRestaurant from './components/Admin/Main/AdminRestaurants';
-import AdminFinance from './components/Admin/Graph/AdminFinance';
 import { ToastContainer } from 'react-toastify';
 import RestaurantRegistration from './components/Restaurant/RestaurantRegistration';
 import RestaurantPage from './components/Restaurant/RestaurantPage';
@@ -29,6 +28,7 @@ import RestaurantLogin from './components/Restaurant/RestaurantLogin';
 import Success from './components/Payment/Success';
 import Cancel from './components/Payment/Cancel';
 import TrackOrder from './components/TrackOrder/TrackOrder';
+import RestaurantOrders from './components/Restaurant/Options/RestaurantOrders';
 
 function App() {
 
@@ -57,7 +57,8 @@ function App() {
         <Route path='/restaurant-dashboard' element={<RestaurantDashboard />} />
         <Route path='/RestaurantAddMenu' element={<RestaurantExtras />} />
         <Route path='/restaurant/:restaurantId' element={<RestaurantPage />}></Route>
-      
+        <Route path='/RestaurantOrders' element={<RestaurantOrders />}></Route>
+
         <Route path='/Adminlogin' element={<AdminLogin />} />
         <Route path='/AdminDashboard' element={<AdminDashboard />} />
         <Route path='/AdminUsers' element={<AdminUsers />} />
@@ -66,7 +67,6 @@ function App() {
         <Route path='/AdminMenu' element={<AdminMenu />} />
         <Route path='/AdminAddMenu' element={<AdminExtras />} />
         <Route path='/AdminRestaurants' element={<AdminRestaurant />} />
-        <Route path='/AdminFinance' element={<AdminFinance />} />
       </Routes>
     </>
   );

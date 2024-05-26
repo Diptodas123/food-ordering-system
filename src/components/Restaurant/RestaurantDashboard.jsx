@@ -8,7 +8,6 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import AdminHeader from '../Admin/Global/AdminHeader';
 import "./RestaurantDashboard.css";
 import AdminStatbox from '../Admin/Global/Statbox';
-import Rating from '@mui/material/Rating';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
@@ -16,6 +15,7 @@ import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined';
 import RestaurantSidebar from './RestaurantSidebar';
 import RestaurantTopbar from './RestaurantTopbar';
+import { useRestaurantContext } from '../../Context/RestaurantContext';
 
 
 
@@ -30,6 +30,14 @@ const xAxisIndex = () => {
 const RestaurantDashboard = () => {
   const [theme, colorMode] = useMode();
   const colors = tokens(theme.palette.mode);
+
+  const {
+    allOrders,
+    allFoodItems,
+    isLoading,
+    topSellingDishes,
+    foodItemsByCategory
+  } = useRestaurantContext();
 
   // ?color palette for pie chart
   const palette = [
@@ -266,9 +274,9 @@ const RestaurantDashboard = () => {
                   </Typography>
                 </Box>
                 {
-                  mockTransactions.slice().reverse().slice(-10).map((transaction, i) => (
+                  allOrders.slice().reverse().slice(-10).map((order, i) => (
                     <Box
-                      key={`${transaction.txId}-${i}`}
+                      key={`${order._id}-${i}`}
                       display='flex'
                       justifyContent='space-between'
                       alignItems='center'
@@ -276,15 +284,15 @@ const RestaurantDashboard = () => {
                       p='15px'
                     >
                       <Box>
-                        <Typography variant='h5' fontWeight='600'>
-                          {transaction.txId}
+                        <Typography variant='h6' fontWeight='600'>
+                          {order._id}
                         </Typography>
                         <Typography>
-                          {transaction.user}
+                          {order.user?.firstName}
                         </Typography>
                       </Box>
                       <Box>
-                        {transaction.date}
+                        {new Date(order.createdAt).toLocaleDateString()}
                       </Box>
                       <Box
                         backgroundColor={colors.greenAccent[500]}
@@ -294,7 +302,7 @@ const RestaurantDashboard = () => {
                         <CurrencyRupeeOutlinedIcon
                           sx={{
                             fontSize: "15px",
-                          }} />{transaction.cost}
+                          }} />{order.totalAmount}
                       </Box>
                     </Box>
                   ))
@@ -325,7 +333,7 @@ const RestaurantDashboard = () => {
                     colors={palette}
                     series={[
                       {
-                        data: mockPieData,
+                        data: foodItemsByCategory,
                         highlightScope: {
                           faded: 'global',
                           highlighted: 'item',
@@ -389,7 +397,7 @@ const RestaurantDashboard = () => {
                 >
                   Top Selling Products
                 </Typography>
-                {mockProductRating.slice(0, 3).map((restaurant, i) => (
+                {topSellingDishes.slice(0, 3).map((restaurant, i) => (
                   <Box
                     display='flex'
                     justifyContent='space-between'
@@ -399,18 +407,14 @@ const RestaurantDashboard = () => {
                     <Typography
                       variant='h4'
                     >
-                      {restaurant.name}
+                      {restaurant._id}
                     </Typography>
                     <Box>
-                      <Rating
-                        name="half-rating-read"
-                        // !value is used to give the rating here
-                        value={restaurant.value}
-                        // ?precision is used to give the half ratings
-                        precision={0.5}
-                        readOnly
-
-                      />
+                      <Typography
+                        variant='h6'
+                      >
+                        {restaurant.count}
+                      </Typography>
                     </Box>
                   </Box>
                 ))
@@ -419,7 +423,7 @@ const RestaurantDashboard = () => {
             </Box>
           </Box>
         </ThemeProvider>
-      </ColorModeContext.Provider >
+      </ColorModeContext.Provider>
     </>
   )
 }

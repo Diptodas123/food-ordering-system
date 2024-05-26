@@ -1,9 +1,11 @@
 .track-order-page-container {
     margin-top: 100px;
     min-height: 300px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .track-order-page-loader {
@@ -18,9 +20,8 @@
 
 .track-order-page-container .track-order-page-left-container {
     width: 60%;
-    min-height: 200px;
+    height: 100%;
     /* border: 1px solid black; */
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 1rem;
 }
 
@@ -58,7 +59,8 @@
 .track-order-page-container .track-order-page-right-container {
     border: 1px solid green;
     width: 40%;
-    height: 429.983px;
+    height: 100%;
+    padding: 1rem;
 }
 
 @media(max-width: 830px) {

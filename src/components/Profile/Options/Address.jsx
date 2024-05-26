@@ -17,7 +17,7 @@ const Address = () => {
     const colors = tokens(theme.palette.mode);
     const [addressIndex, setAddressIndex] = useState(null);
     const [newAddress, setNewAddress] = useState({
-        type: "",
+        type: "Home",
         address: "",
     });
 
@@ -86,7 +86,7 @@ const Address = () => {
         e.preventDefault();
 
         try {
-            const response =await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/updateAddress/${addressIndex}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/updateAddress/${addressIndex}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

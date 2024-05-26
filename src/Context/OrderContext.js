@@ -14,22 +14,40 @@ const OrderProvider = ({ children }) => {
 
     const fetchOrder = async (id) => {
         dispatch({ type: "SET_LOADING" });
-        try{
-            const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/getOrder/${id}`,{
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json",
-                    "auth-token":localStorage.getItem("token")
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/getOrder/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("token")
                 }
             });
 
-            const data=await response.json();
+            const data = await response.json();
             dispatch({ type: "SET_ORDER_DETAILS", payload: data.orderDetails });
-            setTimeout(()=>{
+            setTimeout(() => {
                 dispatch({ type: "UNSET_LOADING" });
-            },2000);
-            
-        }catch(error){
+            }, 2000);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const updateOrderStatus = async (id, status) => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/updateOrderStatus/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ status })
+            });
+            const data = await response.json();
+            if (data.success) {
+                dispatch({ type: "UPDATE_ORDER_STATUS", payload: status });
+            }
+        } catch (error) {
             console.log(error);
         }
     }
@@ -39,7 +57,7 @@ const OrderProvider = ({ children }) => {
     }, [state.orderDetails?.status]);
 
     return (
-        <OrderContext.Provider value={{ ...state, fetchOrder }}>
+        <OrderContext.Provider value={{ ...state, fetchOrder, updateOrderStatus }}>
             {children}
         </OrderContext.Provider>
     )

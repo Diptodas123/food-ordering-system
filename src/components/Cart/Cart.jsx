@@ -9,12 +9,13 @@ import { mockAddress } from '../../data/MockData';
 import FormatPrice from '../../Helper/FormatPrice';
 import { useAppContext } from '../../Context/AppContext';
 import toastMessage from '../ToastMessage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkIcon from '@mui/icons-material/Work';
 import FmdGoodIcon from '@mui/icons-material/FmdGood'
 import { loadStripe } from "@stripe/stripe-js";
+import BackToTop from '../../Helper/BackToTop';
 
 const Cart = () => {
   const { user,
@@ -92,6 +93,10 @@ const Cart = () => {
     }
   }
 
+  useEffect(() => {
+    BackToTop();
+  }, []);
+  
   return (
     <div>
       <Navbar />

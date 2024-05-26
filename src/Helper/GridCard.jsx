@@ -62,11 +62,11 @@ const GridCard = ({ data, index, searchBy }) => {
                                     }
                                 >
                                     {
-                                        data.rating === 0 ?
+                                        data?.rating === 0 ?
                                             <p style={{ marginBottom: 0, color: 'green' }}>New</p>
                                             :
                                             <p style={{ marginBottom: 0 }}>
-                                                {data.rating}
+                                                {data?.rating}
                                             </p>
                                     }
                                     <Star fontSize='small' className='card-star' />

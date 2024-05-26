@@ -10,6 +10,7 @@ import RestaurantPageExploreComponent from "./RestaurantPageExploreComponent";
 import RestaurantPageReviewsComponent from "./RestaurantPageReviewsComponent";
 import RestaurantPagePhotosComponent from "./RestaurantPagePhotosComponent";
 import RestaurantPageMenuComponent from "./RestaurantPageMenuComponent";
+import BackToTop from "../../Helper/BackToTop";
 
 const RestaurantPage = () => {
     const params = useParams();
@@ -72,6 +73,7 @@ const RestaurantPage = () => {
     }
 
     useEffect(() => {
+        BackToTop();
         fetchRestaurant();
         //eslint-disable-next-line
     }, [fetchRestaurant]);
