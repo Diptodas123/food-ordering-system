@@ -11,7 +11,6 @@ const ListView = ({ data = [] }) => {
     const { filter: { searchBy }, isLoading } = useFilterContext();
     const { mode } = useAppContext();
 
-    console.log(data);
     if (isLoading) {
         return <ListSkeleton />;
     } else {
@@ -67,7 +66,7 @@ const ListView = ({ data = [] }) => {
                             )
                         }) : data.map((curElem, index) => {
                             return (
-                                <ListCardItem index={index} foodItem={curElem} />
+                                <ListCardItem key={index} foodItem={curElem} />
                             )
                         })
                 }

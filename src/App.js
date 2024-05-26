@@ -28,6 +28,7 @@ import RestaurantExtras from './components/Restaurant/Options/RestaurantExtras';
 import RestaurantLogin from './components/Restaurant/RestaurantLogin';
 import Success from './components/Payment/Success';
 import Cancel from './components/Payment/Cancel';
+import TrackOrder from './components/TrackOrder/TrackOrder';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
         <Route path='/contact' element=<Contact />></Route>
         <Route path='/success' element=<Success />></Route>
         <Route path='/cancel' element=<Cancel />></Route>
+        <Route path='/track-order/:orderId' element=<TrackOrder />></Route>
 
         <Route path='/restaurant-login' element={<RestaurantLogin />} />
         <Route path='/partner-with-us' element={<RestaurantRegistration />} />

@@ -1,7 +1,7 @@
 import { useUserContext } from '../../Context/UserContext';
 import { useEffect, useState } from 'react';
 import FormatPrice from '../../Helper/FormatPrice';
-const ListCardItem = ({ foodItem, index }) => {
+const ListCardItem = ({ index, foodItem }) => {
 
     const { addToCart, cartItems } = useUserContext();
     const [buttonToggle, setButtonToggle] = useState(false);

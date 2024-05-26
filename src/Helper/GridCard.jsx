@@ -113,7 +113,7 @@ const GridCard = ({ data, index, searchBy }) => {
                             <p style={{ paddingLeft: "0.6rem", fontSize: "1.3rem" }}>
                                 <FormatPrice price={data.price} />
                             </p>
-                            <button className={'btn'} style={{ height: "2.5rem", width: "6.5rem", fontSize: "0.8rem" }}
+                            <button className={'btn'}
                                 onClick={() => handleAddToCart(data)}
                             >
                                 {

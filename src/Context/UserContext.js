@@ -108,8 +108,11 @@ const UserProvider = ({ children }) => {
 
     useEffect(() => {
         fetchAllOrderHistory();
+    }, [state.orderHistory]);
+
+    useEffect(() => {
         fetchAllAddress();
-    }, [state.orderHistory, state.userAddress]);
+    }, [state.userAddress]);
 
     return (
         <UserContext.Provider value={{ ...state, setUser, clearUser, addToCart, incrementQuantity, decrementQuantity, clearCartItems, removeItem, updateAddress, applyDiscount }}>

@@ -49,6 +49,16 @@
     left: 0;
 }
 
+.slider .grid-card .grid-card-item-footer{
+    width: 80%;
+}
+
 .slider .grid-card .grid-card-item-footer button {
-    width: 1rem;
+    width: 9.5rem;
+    padding-left: 1rem;
+}
+
+.slider .grid-card .grid-card-item-footer p{
+    padding-right: 0.9rem;
+    font-size: 0.9rem;
 }
