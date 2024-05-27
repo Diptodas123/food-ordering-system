@@ -3,7 +3,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { CssBaseline, ThemeProvider, Button, colors } from "@mui/material"
 import AdminTopbar from '../Global/AdminTopbar'
 import AdminSidebar from '../Global/AdminSidebar'
-import { ColorModeContext, useMode } from '../theme'
+import { ColorModeContext, tokens, useMode } from '../theme'
 import AdminHeader from '../Global/AdminHeader';
 import "../Main/AdminMainGlobal.css";
 import { DataGrid, GridToolbarFilterButton, GridToolbar, GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack';
 
 const AdminUsers = () => {
   const [theme, colorMode] = useMode();
+  const colors = tokens(theme.palette.mode);
 
   const [allUsers, setAllUsers] = useState([]);
 
@@ -198,7 +199,7 @@ const AdminUsers = () => {
                 },
                 // ?change color of the checkmark in checkbox on click
                 "& .Mui-checked": {
-                  color: `${colors.green[500]} !important`,
+                  color: `${colors.greenAccent[500]} !important`,
                 },
                 // ?change the style of the toolbar above the table
                 "& .MuiDataGrid-toolbarContainer .MuiButton-text": {

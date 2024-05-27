@@ -61,6 +61,11 @@ const reducer = (state, action) => {
                 ...state,
                 allCoupons: action.payload
             }
+        case "SET_ALL_RESTAURANTS":
+            return {
+                ...state,
+                allRestaurants: action.payload
+            }
         default:
             return state;
     }

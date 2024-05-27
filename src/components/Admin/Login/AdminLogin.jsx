@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AdminLogin.css';
 import toastMessage from '../../ToastMessage';
 import { Box, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 const AdminLogin = () => {
@@ -10,6 +11,7 @@ const AdminLogin = () => {
     adminPassword: "",
   });
 
+  const navigate = useNavigate();
   const onValueChange = (e) => {
     setAdmin({ ...admin, [e.target.name]: e.target.value });
     console.log(admin);
@@ -19,9 +21,8 @@ const AdminLogin = () => {
     e.preventDefault();
     if (admin.adminUserName === process.env.REACT_APP_ADMIN_USERNAME && admin.adminPassword === process.env.REACT_APP_ADMIN_PASSWORD) {
       toastMessage({ msg: 'Login successful', type: 'success' });
-      setTimeout(() => {
-        window.location.href = '/AdminDashboard';
-      }, 1500);
+      localStorage.setItem("admin", "true");
+      navigate("/AdminDashboard");
     } else {
       toastMessage({ msg: 'Invalid credentials', type: 'error' });
 

@@ -6,6 +6,7 @@ const RestaurantContext = createContext();
 const initialState = {
     allOrders: [],
     allFoodItems: [],
+    allRestaurants: [],
     isLoading: false,
     topSellingDishes: [],
     topSellingRestaurants: [],
@@ -130,6 +131,22 @@ const RestaurantProvider = ({ children }) => {
             dispatch({ type: "UNSET_LOADING" });
         }
     }
+
+    const fetchAllRestaurants = async () => {
+        dispatch({ type: "SET_LOADING" });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/restaurant/getallRestaurants`);
+            const data = await response.json();
+            if (data.restaurants.length) {
+                dispatch({ type: "SET_ALL_RESTAURANTS", payload: data.restaurants });
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            dispatch({ type: "UNSET_LOADING" });
+        }
+    }
+
     // useEffect(() => {
     //     fetchAllOrders();
     //     fetchAllFoodItems();
@@ -143,7 +160,7 @@ const RestaurantProvider = ({ children }) => {
             value={{
                 ...state, fetchAllOrders, fetchAllFoodItems, fetchTopSellingDishes,
                 fetchTopSellingRestaurants, fetchFoodItemsByCategory, fetchAllUsers,
-                fetchAllCoupons
+                fetchAllCoupons, fetchAllRestaurants
             }}>
             {children}
         </RestaurantContext.Provider>

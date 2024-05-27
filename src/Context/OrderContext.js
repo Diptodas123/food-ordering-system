@@ -4,7 +4,7 @@ import reducer from "../Reducer/OrderReducer";
 const OrderContext = createContext();
 
 const initialState = {
-    orderDetails: {},
+    orderDetails: [],
     totalAmount: 0,
     isLoading: false
 }
@@ -35,6 +35,7 @@ const OrderProvider = ({ children }) => {
     }
 
     const updateOrderStatus = async (id, status) => {
+        console.log(id, status);
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/updateOrderStatus/${id}`, {
                 method: "PUT",
