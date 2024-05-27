@@ -11,17 +11,19 @@ import { RestaurantProvider } from './Context/RestaurantContext.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <AppProvider>
-      <UserProvider>
-        <OrderProvider>
-          <RestaurantProvider>
-            <FilterProvider>
-              <App />
-            </FilterProvider>
-          </RestaurantProvider>
-        </OrderProvider>
-      </UserProvider>
-    </AppProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <AppProvider>
+        <UserProvider>
+          <OrderProvider>
+            <RestaurantProvider>
+              <FilterProvider>
+                <App />
+              </FilterProvider>
+            </RestaurantProvider>
+          </OrderProvider>
+        </UserProvider>
+      </AppProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

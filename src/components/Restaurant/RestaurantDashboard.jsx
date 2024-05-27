@@ -32,11 +32,17 @@ const RestaurantDashboard = () => {
   const colors = tokens(theme.palette.mode);
 
   const {
+    fetchAllOrders,
     allOrders,
+    fetchAllFoodItems,
     allFoodItems,
     isLoading,
+    fetchTopSellingDishes,
     topSellingDishes,
-    foodItemsByCategory
+    allUsers,
+    fetchAllUsers,
+    allCoupons,
+    fetchAllCoupons,
   } = useRestaurantContext();
 
   // ?color palette for pie chart
@@ -47,6 +53,90 @@ const RestaurantDashboard = () => {
     colors.greenAccent[100],
   ];
 
+  const [orders, setOrders] = useState(allOrders);
+  const [completedOrders, setCompletedOrders] = useState([]);
+  const [foodItems, setFoodItems] = useState(allFoodItems);
+  const [topDishes, setTopDishes] = useState(topSellingDishes);
+  const [foodItemsByCategory, setFoodItemsByCategory] = useState([
+    {
+      label: "Veg",
+      value: 0
+    },
+    {
+      label: "Non-Veg",
+      value: 0
+    }
+  ]);
+
+  const restaurantId = sessionStorage.getItem("restaurantId");
+
+  useEffect(() => {
+    if (restaurantId) {
+      fetchAllOrders();
+      fetchAllFoodItems();
+      fetchTopSellingDishes(restaurantId);
+      fetchAllUsers();
+      fetchAllCoupons();
+    }
+  }, [restaurantId]);
+
+  useEffect(() => {
+    if (restaurantId && allOrders.length) {
+      const filteredOrders = allOrders.filter((order) => order.restaurant._id === restaurantId);
+      setOrders(filteredOrders);
+      const filterCompletedOrders = filteredOrders.filter((order) => order.status === "completed");
+      setCompletedOrders(filterCompletedOrders);
+      console.log(completedOrders);
+    }
+  }, [restaurantId, allOrders]);
+
+  useEffect(() => {
+    if (restaurantId && allFoodItems.length) {
+      const filteredFoodItems = allFoodItems.filter((foodItem) => foodItem.restaurant._id === restaurantId);
+      setFoodItems(filteredFoodItems);
+      const filterFoodItemsByCategory = filteredFoodItems.reduce((accumulator, item) => {
+        accumulator[item.category] += 1;
+        return accumulator
+      }, {
+        "Veg": 0,
+        "Non-Veg": 0,
+      });
+      setFoodItemsByCategory([{
+        label: "Veg",
+        value: filterFoodItemsByCategory["Veg"],
+      }, {
+        label: "Non-Veg",
+        value: filterFoodItemsByCategory["Non-Veg"],
+      }]);
+      console.log(filterFoodItemsByCategory);
+    }
+  }, [restaurantId, allFoodItems]);
+
+  useEffect(() => {
+    if (restaurantId && topSellingDishes.length) {
+      const filteredTopSellingDishes = topSellingDishes.filter((dish) => dish._id === restaurantId);
+      setTopDishes(filteredTopSellingDishes);
+      console.log(topDishes);
+    }
+  }, [restaurantId, topSellingDishes]);
+
+  useEffect(() => {
+    if (restaurantId && foodItemsByCategory) {
+      console.log(foodItemsByCategory);
+    }
+  }, [restaurantId, foodItemsByCategory]);
+
+  useEffect(() => {
+    if (restaurantId && allUsers) {
+      console.log(allUsers);
+    }
+  }, [restaurantId, allUsers]);
+
+  useEffect(() => {
+    if (restaurantId && allCoupons) {
+      console.log(allCoupons);
+    }
+  }, [restaurantId, allCoupons]);
   return (
     <>
       <ColorModeContext.Provider value={colorMode}>
@@ -114,7 +204,7 @@ const RestaurantDashboard = () => {
                 className="Admin-StatBox-Background"
               >
                 <AdminStatbox
-                  title="126"
+                  title={allUsers && allUsers.length}
                   subtitle="Total Customers"
                   progress='0.75'
                   increase='+14%'
@@ -132,7 +222,7 @@ const RestaurantDashboard = () => {
                 className="Admin-StatBox-Background"
               >
                 <AdminStatbox
-                  title="89"
+                  title={foodItems && foodItems.length}
                   subtitle="Total Foods"
                   progress='0.7'
                   increase='+21%'
@@ -150,7 +240,7 @@ const RestaurantDashboard = () => {
                 className="Admin-StatBox-Background"
               >
                 <AdminStatbox
-                  title="983"
+                  title={orders && orders.length}
                   subtitle="Total Transactions"
                   progress='0.30'
                   increase='+5%'
@@ -169,7 +259,7 @@ const RestaurantDashboard = () => {
               >
                 <AdminStatbox
 
-                  title="156"
+                  title={completedOrders && completedOrders.length}
                   // subtitle="subtitle"
                   icon={
                     'Total Delivery'
@@ -274,7 +364,7 @@ const RestaurantDashboard = () => {
                   </Typography>
                 </Box>
                 {
-                  allOrders.slice().reverse().slice(-10).map((order, i) => (
+                  orders.slice().reverse().slice(-10).map((order, i) => (
                     <Box
                       key={`${order._id}-${i}`}
                       display='flex'

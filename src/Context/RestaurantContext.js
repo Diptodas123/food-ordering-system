@@ -20,6 +20,7 @@ const initialState = {
         }
     ],
     allCoupons: [],
+    allUsers: [],
 };
 
 const RestaurantProvider = ({ children }) => {
@@ -55,11 +56,10 @@ const RestaurantProvider = ({ children }) => {
         }
     };
 
-    const fetchTopSellingDishes = async () => {
+    const fetchTopSellingDishes = async (id) => {
         dispatch({ type: "SET_LOADING" });
         try {
-            console.log(sessionStorage.getItem("restaurantId"));
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order//topSellingDishes/${sessionStorage.getItem("restaurantId")}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order//topSellingDishes/${id}`);
             const data = await response.json();
             if (data.topSellingDishesByRestaurant.length) {
                 dispatch({ type: "SET_TOP_SELLING_DISHES", payload: data.topSellingDishesByRestaurant });
@@ -101,16 +101,50 @@ const RestaurantProvider = ({ children }) => {
         }
     };
 
-    useEffect(() => {
-        fetchAllOrders();
-        fetchAllFoodItems();
-        fetchTopSellingDishes();
-        fetchTopSellingRestaurants();
-        fetchFoodItemsByCategory();
-    }, []);
+    const fetchAllUsers = async () => {
+        dispatch({ type: "SET_LOADING" });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllUsers`);
+            const data = await response.json();
+            if (data.users.length) {
+                dispatch({ type: "SET_ALL_USERS", payload: data.users });
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            dispatch({ type: "UNSET_LOADING" });
+        }
+    }
+
+    const fetchAllCoupons = async () => {
+        dispatch({ type: "SET_LOADING" });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllCoupons`);
+            const data = await response.json();
+            if (data.coupons.coupon.length) {
+                dispatch({ type: "SET_ALL_COUPONS", payload: data.coupons.coupon });
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            dispatch({ type: "UNSET_LOADING" });
+        }
+    }
+    // useEffect(() => {
+    //     fetchAllOrders();
+    //     fetchAllFoodItems();
+    //     fetchTopSellingDishes();
+    //     fetchTopSellingRestaurants();
+    //     fetchFoodItemsByCategory();
+    // }, [restaurantId]);
 
     return (
-        <RestaurantContext.Provider value={{ ...state, dispatch }}>
+        <RestaurantContext.Provider
+            value={{
+                ...state, fetchAllOrders, fetchAllFoodItems, fetchTopSellingDishes,
+                fetchTopSellingRestaurants, fetchFoodItemsByCategory, fetchAllUsers,
+                fetchAllCoupons
+            }}>
             {children}
         </RestaurantContext.Provider>
     );

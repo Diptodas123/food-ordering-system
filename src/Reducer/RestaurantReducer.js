@@ -51,6 +51,16 @@ const reducer = (state, action) => {
                     }
                 ]
             }
+        case "SET_ALL_USERS":
+            return {
+                ...state,
+                allUsers: action.payload
+            }
+        case "SET_ALL_COUPONS":
+            return {
+                ...state,
+                allCoupons: action.payload
+            }
         default:
             return state;
     }
