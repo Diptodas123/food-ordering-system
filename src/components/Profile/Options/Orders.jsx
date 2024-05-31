@@ -152,7 +152,7 @@ const Orders = () => {
                                                     }}
                                                 >
                                                     {
-                                                        status !== "Completed" ? "Not delivered yet" :
+                                                        status !== "completed" ? "Not delivered yet" :
                                                             <>
                                                                 Delivered&nbsp;on:&nbsp;{new Date(createdAt).toLocaleTimeString()}&nbsp;
                                                                 <CheckCircleIcon color="success" />
@@ -226,7 +226,7 @@ const Orders = () => {
                                                 >REORDER
                                                 </Button>
                                                 {
-                                                    status !== "Completed" ?
+                                                    status !== "completed" ?
                                                         <Button variant="contained"
                                                             color='success'
                                                             sx={{

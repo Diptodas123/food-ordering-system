@@ -1,50 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import { CssBaseline, Box, ThemeProvider, TextField, Button, styled, Stack, Select, MenuItem } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { CssBaseline, ThemeProvider } from "@mui/material"
 import AdminTopbar from '../Global/AdminTopbar'
 import AdminSidebar from '../Global/AdminSidebar'
-import { ColorModeContext, useMode, tokens } from '../theme'
-import { DataGrid, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton } from '@mui/x-data-grid';
 import AdminHeader from '../Global/AdminHeader';
 import "./AdminMainGlobal.css";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { ColorModeContext, tokens, useMode } from '../theme'
+import { DataGrid, GridToolbarFilterButton, GridToolbar, GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
+import Stack from '@mui/material/Stack';
 
 
-
-const AdminRestaurant = () => {
+const AdminContact = () => {
     const [theme, colorMode] = useMode();
     const colors = tokens(theme.palette.mode);
-    const [restaurant, setRestaurant] = useState([]);
+    const [contacts, setContacts] = useState([])
 
-    const fetchRestaurants = async () => {
+    const fetchContacts = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/restaurant/getallRestaurants`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contact/getAllContacts`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 }
             });
             const data = await response.json();
-            const gettingRestaurants = data.restaurants.map(restaurant => ({
-                ...restaurant,
-                _id: restaurant?._id || "N/A",
-                name: restaurant?.name || "N/A",
-                imgUrls: restaurant?.imgUrls[0] || "N/A",
-                state: restaurant?.state || "N/A",
-                city: restaurant?.city || "N/A",
-                email: restaurant?.email || "N/A",
-                phone: restaurant?.phone || "N/A",
-                itemCount: restaurant?.foodItems.length || "N/A",
-
-            }));
-            setRestaurant(gettingRestaurants);
-            console.log(gettingRestaurants);
+            setContacts(data.contacts);
+            console.log(data.contacts);
         } catch (error) {
             console.log(error);
-        }
-    }
-    useEffect(() => {
-        fetchRestaurants();
-    }, [])
 
+        }
+
+    }
+
+    useEffect(() => {
+        fetchContacts();
+    }, [])
 
     const columns = [
         {
@@ -52,42 +43,16 @@ const AdminRestaurant = () => {
             headerName: "ID",
             width: 90,
         },
-
-        {
-            field: "imgUrls",
-            headerName: "Image",
-            width: 100,
-            cellClassName: "photo-column-cell",
-            renderCell: (params) => <img src={params.value}
-                alt="User images"
-                id="admin-user-images"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                }}
-            />,
-        },
-
         {
             field: "name",
-            headerName: "Restaurant",
+            headerName: "User",
             flex: 1,
             cellClassName: "name-column-cell"
         },
         {
-            field: "itemCount",
-            headerName: "Food Count",
-            flex: 1,
-        },
-        {
-            field: "state",
-            headerName: "State",
-            flex: 1,
-        },
-        {
-            field: "city",
-            headerName: "City",
-            flex: 1,
+            field: "message",
+            headerName: "Query",
+            flex: 2
         },
         {
             field: "email",
@@ -96,10 +61,11 @@ const AdminRestaurant = () => {
         },
         {
             field: "phone",
-            headerName: "Contact Info",
-            flex: 1,
+            headerName: "Contact Number",
+            flex: 1
         },
     ]
+
 
     const customToolbar = () => {
         return (
@@ -119,6 +85,7 @@ const AdminRestaurant = () => {
             </Stack>
         )
     }
+
     return (
         <>
             <ColorModeContext.Provider value={colorMode}>
@@ -143,7 +110,7 @@ const AdminRestaurant = () => {
                             justifyContent='space-between'
                             alignItems='center'>
 
-                            <AdminHeader title="RESTAURANTS" subtitle="Check Restaurants Here" />
+                            <AdminHeader title="Queries" subtitle="Check the Queries" />
                         </Box>
                         <Box ml="1.3rem">
                             <DataGrid
@@ -196,7 +163,7 @@ const AdminRestaurant = () => {
                                     },
                                 }}
                                 getRowId={(row) => row._id}
-                                rows={restaurant}
+                                rows={contacts}
                                 columns={columns}
                                 slots={{
                                     toolbar: customToolbar,
@@ -219,10 +186,11 @@ const AdminRestaurant = () => {
 
                             />
                         </Box>
+
                     </Box>
                 </ThemeProvider>
             </ColorModeContext.Provider>
         </>
     )
 }
-export default AdminRestaurant;
+export default AdminContact;

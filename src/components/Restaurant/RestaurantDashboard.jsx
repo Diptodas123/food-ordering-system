@@ -15,7 +15,7 @@ import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined';
 import RestaurantSidebar from './RestaurantSidebar';
 import RestaurantTopbar from './RestaurantTopbar';
-import { useRestaurantContext } from '../../Context/RestaurantContext';
+import { useRestaurantContext } from '../../Context/RestaurantContext.js';
 
 
 
@@ -152,7 +152,7 @@ const RestaurantDashboard = () => {
           {/* CONTENT */}
           <Box
             ml="16rem"
-            mt='4.324rem'
+            mt='3.324rem'
             mr='0.3125rem'
           >
 

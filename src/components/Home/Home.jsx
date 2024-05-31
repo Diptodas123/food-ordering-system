@@ -15,6 +15,7 @@ import toastMessage from "../ToastMessage";
 import { Email } from "@mui/icons-material";
 import { useUserContext } from "../../Context/UserContext";
 import { useFilterContext } from "../../Context/FilterContext";
+import BackToTop from "../../Helper/BackToTop";
 
 const Home = () => {
   const typeWriterstrings = [
@@ -34,6 +35,11 @@ const Home = () => {
   const { user } = useUserContext();
 
   useEffect(() => {
+    BackToTop();
+  }, [])
+
+
+  useEffect(() => {
     const testimonialsBody = document.querySelector(".testimonials-body");
     setTimeout(() => {
       testimonialsBody.style.opacity = 1;
@@ -42,7 +48,7 @@ const Home = () => {
       testimonialsBody.style.opacity = 0.5;
     })
   }, [testimonialIndex]);
-
+  
 
   const [text] = useTypewriter({
     words: typeWriterstrings,
@@ -76,7 +82,7 @@ const Home = () => {
     }
   ]
 
-  const { allRestaurants,allDishes } = useFilterContext();
+  const { allRestaurants, allDishes } = useFilterContext();
   const featuredRestaurants = allRestaurants.slice(0, 7);
   const featuredDishes = allDishes.slice(0, 7);
 
@@ -142,6 +148,9 @@ const Home = () => {
     } else {
       toastMessage({ msg: "Invalid Email", type: "error" });
     }
+    setTimeout(() => {
+      setNewsletter({ ...newsletter, email: "" });
+    }, 3000);
   }
 
   const handleOnChange = (e) => {
@@ -244,7 +253,12 @@ const Home = () => {
           <h4>Testimonials</h4>
           <p>What our customers say about us</p>
           <div className="testimonials-container">
-            <button className="testimonials-left-btn" onClick={() => setTestimonialIndex((testimonialIndex - 1 + testimonials.length) % testimonials.length)}>&lt;</button>
+            <button className="testimonials-left-btn" onClick={() => {
+              setTestimonialIndex((testimonialIndex - 1 + testimonials.length) % testimonials.length);
+            }}
+            >
+              &lt;
+            </button>
             <div className="testimonials-body">
               <div className="text-part">
                 <p>"{testimonials[testimonialIndex].text}"</p>
@@ -257,7 +271,12 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <button className="testimonials-right-btn" onClick={() => setTestimonialIndex((testimonialIndex + 1) % testimonials.length)}>&gt;</button>
+            <button className="testimonials-right-btn" onClick={() => {
+              setTestimonialIndex((testimonialIndex + 1) % testimonials.length);
+            }}
+            >
+              &gt;
+            </button>
           </div>
         </div>
 

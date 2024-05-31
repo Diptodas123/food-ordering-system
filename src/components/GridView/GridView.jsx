@@ -4,6 +4,7 @@ import GridSkeleton from './GridSkeleton';
 import GridCard from '../../Helper/GridCard';
 const GridView = ({ data = [], searchBy }) => {
     const { isLoading } = useFilterContext();
+
     if (isLoading) {
         return <GridSkeleton />
     } else {

@@ -14,8 +14,8 @@ import OutdoorGrillOutlinedIcon from '@mui/icons-material/OutdoorGrillOutlined';
 import MopedOutlinedIcon from '@mui/icons-material/MopedOutlined';
 import DoneAllOutlinedIcon from '@mui/icons-material/DoneAllOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import { useOrderContext } from '../../../Context/OrderContext';
 import { useRestaurantContext } from '../../../Context/RestaurantContext';
+
 const RestaurantOrders = () => {
 
   const {
@@ -23,18 +23,15 @@ const RestaurantOrders = () => {
     fetchAllOrders,
   } = useRestaurantContext()
 
-  const { updateOrderStatus, fetchOrder } = useOrderContext();
-
   const [theme, colorMode] = useMode();
   const colors = tokens(theme.palette.mode);
   const [orders, setOrders] = useState(allOrders)
-  const [rows, setRows] = useState(mockFavourites)
-  const [progress, setProgress] = useState([]);
+  const [rows, setRows] = useState([])
+
   const restaurantId = sessionStorage.getItem("restaurantId");
 
   const handleChange = (id, newValue) => {
     setRows(rows.map(row => (row.id === id ? { ...row, progress: newValue } : row)));
-    updateOrderStatus(id, newValue);
   };
 
   useEffect(() => {
@@ -45,14 +42,21 @@ const RestaurantOrders = () => {
 
   useEffect(() => {
     if (restaurantId && allOrders.length) {
-      const filteredOrders = allOrders.filter((order) => order.restaurant._id === restaurantId);
+      const filteredOrders = allOrders.filter((order) => order.restaurant._id === restaurantId).map(order => ({
+        ...order,
+        firstName: order.user?.firstName || 'N/A',
+        foodItem: order?.foodItems.map(item => item.name).join(', ') || 'N/A',
+        itemCount: order?.foodItems.length || 'N/A',
+        totalAmount: order?.totalAmount || 'N/A',
+      }));
       setOrders(filteredOrders);
       console.log(orders);
-      orders.forEach((order) => {
-        fetchOrder(order._id);
-      })
+
     }
   }, [allOrders]);
+
+
+
 
   const columns = [
     {
@@ -60,27 +64,26 @@ const RestaurantOrders = () => {
       headerName: "ID",
       width: 90,
     },
-
     {
-      field: "img",
-      headerName: "Avatar",
-      width: 100,
-      cellClassName: "photo-column-cell",
-      renderCell: (params) => <img src={params.value}
-        alt="User images"
-        id="admin-user-images"
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-      />,
-    },
-
-    {
-      field: "foodName",
-      headerName: "Food Item",
+      field: "firstName",
+      headerName: "Name",
       flex: 1,
       cellClassName: "name-column-cell"
+    },
+    {
+      field: "foodItem",
+      headerName: "Food Items",
+      flex: 1,
+    },
+    {
+      field: "itemCount",
+      headerName: "Number of Items",
+      flex: 1,
+    },
+    {
+      field: "totalAmount",
+      headerName: "Total (₹)",
+      flex: 1,
     },
     {
       field: "progress",
@@ -104,7 +107,7 @@ const RestaurantOrders = () => {
             value={row.progress}
             onChange={(e) => handleChange(row.id, e.target.value)}
             label="Progress"
-            defaultValue="Pending"
+            defaultValue="pending"
             sx={{
               "& .MuiSelect-select": {
                 color: `${colors.grey[900]}`,
@@ -120,7 +123,7 @@ const RestaurantOrders = () => {
             }}
 
           >
-            <MenuItem value={'Pending'}
+            <MenuItem value={'pending'}
               sx={{
                 color: `${colors.redAccent[500]}`,
                 display: 'flex',
@@ -187,31 +190,31 @@ const RestaurantOrders = () => {
         </Box >
       ),
     },
-    {
-      field: "action",
-      headerName: "Action",
-      flex: 1,
-      renderCell: ({ row: { action } }) => (
+    // {
+    //   field: "action",
+    //   headerName: "Action",
+    //   flex: 1,
+    //   renderCell: ({ row: { action } }) => (
 
-        <Box
-          width="40%"
-          m="0 auto"
-          p="2px"
-          display="flex"
-          justifyContent="center"
-          borderRadius="4px"
-        >
+    //     <Box
+    //       width="40%"
+    //       m="0 auto"
+    //       p="2px"
+    //       display="flex"
+    //       justifyContent="center"
+    //       borderRadius="4px"
+    //     >
 
-          {/* //?Adds a delete button to every row in the table */}
-          <Button
-            color="error"
-            className="admin-user-table-action-button"
-            id="admin-user-table-action-button">
-            <DeleteIcon />Delete
-          </Button>
-        </Box>
-      ),
-    },
+    //       {/* //?Adds a delete button to every row in the table */}
+    //       <Button
+    //         color="error"
+    //         className="admin-user-table-action-button"
+    //         id="admin-user-table-action-button">
+    //         <DeleteIcon />Delete
+    //       </Button>
+    //     </Box>
+    //   ),
+    // },
   ];
   const customToolbar = () => {
     return (

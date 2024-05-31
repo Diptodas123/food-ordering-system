@@ -235,7 +235,7 @@ const Address = () => {
                                                         variant="outlined"
                                                         color='success'
                                                         data-toggle='modal'
-                                                        data-target='#exampleModal'
+                                                        data-target='#editModal'
                                                         onClick={() => handleEdit(index)}
                                                     >
                                                         Edit
@@ -259,11 +259,11 @@ const Address = () => {
             </Box>
 
             {/* EDIT MODAL */}
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="editModal" tabIndex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content profile-modal">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Change Address</h5>
+                            <h5 className="modal-title" id="editModalLabel">Change Address</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

@@ -83,7 +83,7 @@ const AdminDashboard = () => {
           {/* CONTENT */}
           <Box
             ml="16rem"
-            mt='4.324rem'
+            mt='3.324rem'
             mr='0.3125rem'
           >
 
@@ -447,4 +447,3 @@ const AdminDashboard = () => {
   )
 }
 export default AdminDashboard;
-

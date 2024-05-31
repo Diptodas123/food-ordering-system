@@ -1,10 +1,11 @@
 import { React, useState } from 'react';
 import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { tokens } from '../theme';
 import "./AdminSidebar.css"
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
+import ContactEmergencyOutlinedIcon from '@mui/icons-material/ContactEmergencyOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
@@ -16,22 +17,11 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-  const navigate = useNavigate();
-  const handler = (title) => {
-    if (title === "Sign Out") {
-      setSelected(title)
-      localStorage.removeItem("admin");
-      navigate("/AdminLogin");
-    } else {
-      setSelected(title);
-    }
-  }
-
   return (
     <Link to={to}>
       <MenuItem
         active={selected === title}
-        onClick={() => handler(title)}
+        onClick={() => setSelected(title)}
         icon={icon}
       >
         <Typography>{title}</Typography>
@@ -151,14 +141,7 @@ const AdminSidebar = () => {
             >
             </Item>
 
-            <Item
-              title="Extras"
-              to={"/AdminAddMenu"}
-              icon={<AddOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            >
-            </Item>
+      
 
             <Item
               title="Restaurants"
@@ -169,15 +152,23 @@ const AdminSidebar = () => {
             >
             </Item>
 
-            <Item
+            {/* <Item
               title="Coupons"
               to={"/AdminCoupons"}
               icon={<CurrencyExchangeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             >
-            </Item>
+            </Item> */}
 
+            <Item
+              title="Queries"
+              to={"/AdminContact"}
+              icon={<ContactEmergencyOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            >
+            </Item>
             <Typography
               variant='h6'
               sx={{

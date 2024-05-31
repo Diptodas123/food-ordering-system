@@ -27,7 +27,6 @@ const SearchResults = () => {
   }
 
   if (gridView) {
-    console.log(filterRestaurants);
     return (
       <GridView searchBy={searchBy} data={searchBy === "Restaurants" ? filterRestaurants : filterDishes} />
     )

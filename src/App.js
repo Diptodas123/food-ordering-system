@@ -13,7 +13,6 @@ import AdminUsers from './components/Admin/Users/AdminUsers';
 import AdminOrders from './components/Admin/Main/AdminOrders';
 import AdminCoupon from './components/Admin/Main/AdminCoupons';
 import AdminMenu from './components/Admin/Main/AdminMenu';
-import AdminExtras from './components/Admin/Main/AdminExtra';
 import AdminRestaurant from './components/Admin/Main/AdminRestaurants';
 import { ToastContainer } from 'react-toastify';
 import RestaurantRegistration from './components/Restaurant/RestaurantRegistration';
@@ -65,7 +64,6 @@ function App() {
         <Route path='/AdminOrders' element={<AdminOrders />} />
         <Route path='/AdminCoupons' element={<AdminCoupon />} />
         <Route path='/AdminMenu' element={<AdminMenu />} />
-        <Route path='/AdminAddMenu' element={<AdminExtras />} />
         <Route path='/AdminRestaurants' element={<AdminRestaurant />} />
       </Routes>
     </>
