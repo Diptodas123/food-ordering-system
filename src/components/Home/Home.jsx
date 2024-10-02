@@ -93,7 +93,7 @@ const Home = () => {
     },
     {
       name: "Chinese",
-      link: "https://www.hotelmousai.com/blog/wp-content/uploads/2021/11/Chinise-food.jpg",
+      link: "https://xiaomudeng.com/blog/wp-content/uploads/2023/09/best-chinese-food-you-need-to-try-in-singapore-scaled.jpg",
     },
     {
       name: "Italian",
