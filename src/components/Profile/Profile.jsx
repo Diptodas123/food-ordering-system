@@ -21,7 +21,7 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { useUserContext } from "../../Context/UserContext.js";
-import BackToTop from "../../Helper/BackToTop.js";
+import BackToTop from "../../Helper/backToTop.js";
 
 
 const Item = ({ title, icon, className, onClick }) => {

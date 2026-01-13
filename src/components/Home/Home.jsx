@@ -15,7 +15,7 @@ import toastMessage from "../ToastMessage";
 import { Email } from "@mui/icons-material";
 import { useUserContext } from "../../Context/UserContext";
 import { useFilterContext } from "../../Context/FilterContext";
-import BackToTop from "../../Helper/BackToTop";
+import BackToTop from "../../Helper/backToTop";
 
 const Home = () => {
   const typeWriterstrings = [
@@ -62,7 +62,7 @@ const Home = () => {
     },
     {
       name: "chinese",
-      link: 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      link: 'https://assets.epicurious.com/photos/624d9590857fa7e509238b59/master/pass/RegionalChinese_HERO_033122_31320.jpg',
     },
     {
       name: "pizza",
@@ -93,7 +93,7 @@ const Home = () => {
     },
     {
       name: "Chinese",
-      link: "https://xiaomudeng.com/blog/wp-content/uploads/2023/09/best-chinese-food-you-need-to-try-in-singapore-scaled.jpg",
+      link: "https://assets.epicurious.com/photos/624d9590857fa7e509238b59/master/pass/RegionalChinese_HERO_033122_31320.jpg",
     },
     {
       name: "Italian",

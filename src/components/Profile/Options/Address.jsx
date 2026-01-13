@@ -1,21 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { tokens, useMode } from '../../Admin/theme'
-import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home';
 import WorkIcon from '@mui/icons-material/Work';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { mockAddress } from '../../../data/MockData';
 import "../Profile.css"
 import toastMessage from '../../ToastMessage';
 import { useUserContext } from '../../../Context/UserContext';
 
 const Address = () => {
-    const [theme, colorMode] = useMode()
-    const { user, setUser, userAddress } = useUserContext();
+    const [theme] = useMode()
+    const { user, userAddress, updateAddress } = useUserContext();
     const colors = tokens(theme.palette.mode);
     const [addressIndex, setAddressIndex] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [newAddress, setNewAddress] = useState({
         type: "Home",
         address: "",
@@ -23,10 +21,36 @@ const Address = () => {
 
     const cancelRef = useRef(null);
 
+    // Fetch addresses when component mounts
+    useEffect(() => {
+        const fetchAddresses = async () => {
+            if (!user) return;
+            
+            setLoading(true);
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllAddress`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": localStorage.getItem("token"),
+                    },
+                });
+                const data = await response.json();
+                if (data.success !== false && data.address) {
+                    // Addresses will be updated via context if updateAddress exists
+                }
+            } catch (error) {
+                console.error("Error fetching addresses:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchAddresses();
+    }, [user]);
+
 
     const handleOnChange = (e) => {
         setNewAddress({ ...newAddress, [e.target.name]: e.target.value });
-        console.log(newAddress);
     }
 
     const handleAddNewAddress = async (e) => {
@@ -59,6 +83,8 @@ const Address = () => {
     }
 
     const handleDeleteAddress = async (index) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this address?');
+        if (!confirmDelete) return;
 
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/deleteAddress/${index}`, {
@@ -71,9 +97,22 @@ const Address = () => {
 
             const json = await response.json();
             if (!json.success) {
-                return toastMessage({ msg: json.message, type: "error" });
+                toastMessage({ msg: json.message, type: "error" });
             } else {
-                return toastMessage({ msg: json.message, type: "success" });
+                toastMessage({ msg: json.message, type: "success" });
+                
+                // Refresh addresses
+                const refreshResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllAddress`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": localStorage.getItem("token"),
+                    },
+                });
+                const refreshData = await refreshResponse.json();
+                if (refreshData.address && updateAddress) {
+                    updateAddress(refreshData.address);
+                }
             }
         } catch (error) {
             console.log(error);
@@ -167,9 +206,13 @@ const Address = () => {
                                 gap: 4,
                             }}
                         >
-
                             {
-                                userAddress.map((value, index) => {
+                                loading ? (
+                                    <Typography variant="h6" sx={{ width: '100%', textAlign: 'center', py: 4 }}>
+                                        Loading addresses...
+                                    </Typography>
+                                ) : userAddress && userAddress.length > 0 ? (
+                                    userAddress.map((value, index) => {
                                     const { type, address } = value
                                     return (
                                         <Box className="profile-address-card"
@@ -252,6 +295,11 @@ const Address = () => {
                                         </Box>
                                     )
                                 })
+                                ) : (
+                                    <Typography variant="h6" sx={{ width: '100%', textAlign: 'center', py: 4 }}>
+                                        No addresses saved. Click "Add New Address" to get started.
+                                    </Typography>
+                                )
                             }
                         </Box>
                     </Box>
