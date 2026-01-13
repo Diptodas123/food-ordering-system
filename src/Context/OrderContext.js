@@ -7,7 +7,8 @@ const OrderContext = createContext();
 const initialState = {
     orderDetails: [],
     totalAmount: 0,
-    isLoading: false
+    isLoading: false,
+    eventSource: null
 }
 
 const OrderProvider = ({ children }) => {
@@ -61,12 +62,61 @@ const OrderProvider = ({ children }) => {
         }
     }
 
+    // Connect to SSE for real-time order status updates
+    const connectToOrderStatusStream = (orderId) => {
+
+        // Close existing connection if any
+        if (state.eventSource) {
+            state.eventSource.close();
+        }
+
+        const eventSource = new EventSource(`${process.env.REACT_APP_BACKEND_URL}/api/order/streamOrderStatus/${orderId}`);
+
+        eventSource.onopen = () => {
+            console.log('SSE connection established');
+        };
+
+        eventSource.onmessage = (event) => {
+            console.log('SSE message received:', event.data);
+            try {
+                const data = JSON.parse(event.data);
+                console.log('Parsed SSE data:', data);
+                if (data.status) {
+                    console.log('Updating order status to:', data.status);
+                    dispatch({ type: "UPDATE_ORDER_STATUS", payload: data.status });
+                }
+            } catch (error) {
+                console.error("Error parsing SSE data:", error);
+            }
+        };
+
+        eventSource.onerror = (error) => {
+            console.error("SSE connection error:", error);
+            console.error("EventSource readyState:", eventSource.readyState);
+            if (eventSource.readyState === EventSource.CLOSED) {
+                console.log('SSE connection closed');
+            }
+        };
+
+        dispatch({ type: "SET_EVENT_SOURCE", payload: eventSource });
+
+        return eventSource;
+    }
+
+    // Disconnect from SSE stream
+    const disconnectFromOrderStatusStream = () => {
+        if (state.eventSource) {
+            state.eventSource.close();
+            dispatch({ type: "SET_EVENT_SOURCE", payload: null });
+        }
+    }
+
     useEffect(() => {
         dispatch({ type: "UPDATE_ORDER_STATUS", payload: state.orderDetails?.status });
     }, [state.orderDetails?.status]);
 
     return (
-        <OrderContext.Provider value={{ ...state, fetchOrder, updateOrderStatus }}>
+        <OrderContext.Provider value={{ ...state, fetchOrder, updateOrderStatus, connectToOrderStatusStream, disconnectFromOrderStatusStream }}>
             {children}
         </OrderContext.Provider>
     )
