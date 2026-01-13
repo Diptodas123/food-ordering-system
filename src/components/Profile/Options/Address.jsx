@@ -7,6 +7,7 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import "../Profile.css"
 import toastMessage from '../../ToastMessage';
 import { useUserContext } from '../../../Context/UserContext';
+import { getAuthToken } from '../../../Helper/authHelper';
 
 const Address = () => {
     const [theme] = useMode()
@@ -26,13 +27,20 @@ const Address = () => {
         const fetchAddresses = async () => {
             if (!user) return;
             
+            const token = getAuthToken();
+            if (!token) {
+                console.log("No valid token found");
+                setLoading(false);
+                return;
+            }
+            
             setLoading(true);
             try {
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllAddress`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem("token"),
+                        "auth-token": token,
                     },
                 });
                 const data = await response.json();
@@ -56,12 +64,17 @@ const Address = () => {
     const handleAddNewAddress = async (e) => {
         e.preventDefault();
 
+        const token = getAuthToken();
+        if (!token) {
+            return toastMessage({ msg: "Authentication required", type: "error" });
+        }
+        
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/addAddress`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem("token")
+                    "auth-token": token
                 },
                 body: JSON.stringify({
                     type: newAddress.type,
@@ -86,12 +99,17 @@ const Address = () => {
         const confirmDelete = window.confirm('Are you sure you want to delete this address?');
         if (!confirmDelete) return;
 
+        const token = getAuthToken();
+        if (!token) {
+            return toastMessage({ msg: "Authentication required", type: "error" });
+        }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/deleteAddress/${index}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem("token")
+                    "auth-token": token
                 }
             });
 
@@ -106,7 +124,7 @@ const Address = () => {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem("token"),
+                        "auth-token": token,
                     },
                 });
                 const refreshData = await refreshResponse.json();
@@ -124,12 +142,17 @@ const Address = () => {
     const handleEditAddress = async (e) => {
         e.preventDefault();
 
+        const token = getAuthToken();
+        if (!token) {
+            return toastMessage({ msg: "Authentication required", type: "error" });
+        }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/updateAddress/${addressIndex}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem("token")
+                    "auth-token": token
                 },
                 body: JSON.stringify({
                     type: newAddress.type,

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import reducer from "../Reducer/OrderReducer";
+import { getAuthToken } from "../Helper/authHelper";
 
 const OrderContext = createContext();
 
@@ -14,12 +15,19 @@ const OrderProvider = ({ children }) => {
 
     const fetchOrder = async (id) => {
         dispatch({ type: "SET_LOADING" });
+        const token = getAuthToken();
+        if (!token) {
+            console.log("No valid token found for fetching order");
+            dispatch({ type: "UNSET_LOADING" });
+            return;
+        }
+        
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/getOrder/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem("token")
+                    "auth-token": token
                 }
             });
 

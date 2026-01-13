@@ -1,4 +1,6 @@
 // API Configuration
+import { getAuthToken } from '../Helper/authHelper';
+
 export const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 // API Endpoints
@@ -64,7 +66,7 @@ export const apiCall = async (endpoint, options = {}) => {
     },
   };
   
-  const token = localStorage.getItem('token');
+  const token = getAuthToken();
   if (token) {
     defaultOptions.headers['auth-token'] = token;
   }

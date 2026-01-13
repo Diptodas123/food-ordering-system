@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FormatPrice from '../../Helper/FormatPrice';
 import { useAppContext } from '../../Context/AppContext';
 import toastMessage from '../ToastMessage';
+import { getAuthToken } from '../../Helper/authHelper';
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
@@ -111,13 +112,19 @@ const Cart = () => {
   useEffect(() => {
     const fetchAddresses = async () => {
       if (user) {
+        const token = getAuthToken();
+        if (!token) {
+          console.log("No valid token found");
+          return;
+        }
+        
         setAddressLoading(true);
         try {
           const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getAllAddress`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("token"),
+              "auth-token": token,
             },
           });
           const data = await response.json();
