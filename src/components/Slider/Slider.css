@@ -3,6 +3,8 @@
     position: relative;
 }
 
+@import "../GridView/GridView.css";
+
 .slider {
     display: flex;
     overflow: hidden;
