@@ -31,9 +31,7 @@ const Success = () => {
               restaurant: cartItems[0].restaurant,
               address: localStorage.getItem("address"),
               cartItems,
-              totalAmount: discount
-                ? totalCartItemPrice + deliveryCharge - discount
-                : totalCartItemPrice + deliveryCharge,
+              totalAmount: totalCartItemPrice,
             }),
           }
         );
@@ -73,15 +71,7 @@ const Success = () => {
           />
           <h2>Payment Successful!</h2>
           <p>
-            Thank you! Your payment of{" "}
-            <FormatPrice
-              price={
-                discount
-                  ? totalCartItemPrice + deliveryCharge - discount
-                  : totalCartItemPrice + deliveryCharge
-              }
-            />{" "}
-            has been received.
+            Thank you! Your payment of <FormatPrice price={totalCartItemPrice} /> has been received.
           </p>
           <NavLink to="/">
             <button className="btn">Back to Home</button>
